@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profitable Dairy & Beef Planner | লাভজনক ডেইরি ও গরু মোটাতাজাকরণ পরিকল্পনাকারী</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0fdf4; /* A light green background */
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease-in-out;
+            page-break-inside: avoid;
+        }
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #22c55e; /* Green border */
+            padding-bottom: 0.75rem;
+        }
+        .card-header svg {
+            width: 2rem;
+            height: 2rem;
+            margin-right: 0.75rem;
+            color: #22c55e;
+        }
+        .card-header h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #166534; /* Darker green */
+        }
+        .table-auto th {
+            background-color: #dcfce7; /* Light green for table headers */
+        }
+        .protocol {
+            border-left: 4px solid #86efac;
+            margin-top: 1rem;
+            padding-left: 1rem;
+        }
+        .protocol h4 {
+            font-weight: 600;
+            color: #15803d;
+        }
+        .tab-button {
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            border-radius: 0.5rem 0.5rem 0 0;
+            font-weight: 600;
+            background-color: #dcfce7;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+            border-bottom: none;
+            transition: all 0.2s ease-in-out;
+        }
+        .tab-button.active {
+            background-color: #22c55e;
+            color: white;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        @media print {
+            body {
+                background-color: white;
+            }
+            .no-print {
+                display: none;
+            }
+            .card {
+                box-shadow: none;
+                border: 1px solid #ccc;
+                margin-bottom: 1rem;
+            }
+            #results-container, .tab-content {
+                display: block !important;
+            }
+            .tab-button {
+                display: none;
+            }
+            .print-header {
+                display: block !important;
+                font-size: 1.8rem;
+                font-weight: bold;
+                color: #166534;
+                margin-top: 2rem;
+                margin-bottom: 1rem;
+                border-bottom: 2px solid #166534;
+                padding-bottom: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container mx-auto p-4 md:p-8">
+        <!-- Header Section -->
+        <header class="text-center mb-8 no-print">
+            <h1 class="text-4xl md:text-5xl font-bold text-green-800">Profitable Farm Planner</h1>
+            <p class="text-lg text-gray-600 mt-2">আপনার খামারের তথ্য দিন এবং সম্পূর্ণ লাভজনক পরিকল্পনা পান</p>
+        </header>
+
+        <!-- Input Forms Container -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 no-print">
+            <div id="dairy-form-container">
+                <div class="card h-full">
+                     <div class="card-header">
+                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.35 3.836c-.065.227-.1.462-.1.7V15a2.25 2.25 0 0 0 2.25 2.25h.383m-2.733 0H7.5a2.25 2.25 0 0 1-2.25-2.25V4.576c0-.238.035-.473.1-.7M11.35 3.836l-.793-1.585A8.25 8.25 0 0 0 2.25 4.5v11.25c0 1.242 1.008 2.25 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V4.5c0-1.242-1.008-2.25-2.25-2.25h-5.106a8.25 8.25 0 0 0-8.044-1.244Z" /></svg>
+                        <h2>Dairy Herd Information | ডেইরি পালের তথ্য</h2>
+                    </div>
+                    <form id="cow-form" class="space-y-4">
+                         <div>
+                            <label for="cattleCount" class="block text-sm font-medium text-gray-700">Number of Cattle | গরুর সংখ্যা</label>
+                            <input type="number" id="cattleCount" name="cattleCount" min="1" value="1" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" placeholder="e.g., 10" required>
+                        </div>
+                        <div>
+                            <label for="receivedDate" class="block text-sm font-medium text-gray-700">Average Received Date | গড় প্রাপ্তির তারিখ</label>
+                            <input type="date" id="receivedDate" name="receivedDate" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" required>
+                        </div>
+                        <div>
+                            <label for="bodyWeight" class="block text-sm font-medium text-gray-700">Average Body Weight (kg) | গড় দৈহিক ওজন (কেজি)</label>
+                            <input type="number" id="bodyWeight" name="bodyWeight" min="100" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" placeholder="e.g., 450" required>
+                        </div>
+                        <div>
+                            <label for="milkProduction" class="block text-sm font-medium text-gray-700">Average Milk Production (Liters/day/cow) | গড় দুধ উৎপাদন (লিটার/দিন/গরু)</label>
+                            <input type="number" id="milkProduction" name="milkProduction" min="0" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" placeholder="e.g., 15" required>
+                        </div>
+                        <div class="flex justify-end pt-2">
+                            <button type="submit" class="w-full md:w-auto inline-flex justify-center rounded-md border border-transparent bg-green-600 py-3 px-6 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
+                                Generate Dairy Plan | ডেইরি পরিকল্পনা তৈরি করুন
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div id="fattening-form-container">
+                 <div class="card h-full">
+                     <div class="card-header">
+                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941" /></svg>
+                        <h2>Beef Fattening Information | মোটাতাজাকরণ তথ্য</h2>
+                    </div>
+                    <form id="fattening-form" class="space-y-4">
+                         <div>
+                            <label for="fatteningCattleCount" class="block text-sm font-medium text-gray-700">Number of Cattle | গরুর সংখ্যা</label>
+                            <input type="number" id="fatteningCattleCount" min="1" value="1" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" required>
+                        </div>
+                        <div>
+                            <label for="startDate" class="block text-sm font-medium text-gray-700">Starting Date | শুরু করার তারিখ</label>
+                            <input type="date" id="startDate" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" required>
+                        </div>
+                        <div>
+                            <label for="initialWeight" class="block text-sm font-medium text-gray-700">Average Initial Weight (kg) | গড় প্রাথমিক ওজন (কেজি)</label>
+                            <input type="number" id="initialWeight" min="50" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" placeholder="e.g., 200" required>
+                        </div>
+                        <div>
+                            <label for="fatteningPeriod" class="block text-sm font-medium text-gray-700">Fattening Period | সময়কাল</label>
+                            <select id="fatteningPeriod" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500">
+                                <option value="3">3 Months | ৩ মাস</option>
+                                <option value="4">4 Months | ৪ মাস</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="adg" class="block text-sm font-medium text-gray-700">Target Average Daily Gain (ADG) (kg) | কাঙ্ক্ষিত দৈনিক গড় ওজন বৃদ্ধি (কেজি)</label>
+                            <input type="number" id="adg" step="0.1" value="1.0" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" placeholder="e.g., 1.2" required>
+                        </div>
+                        <div class="flex justify-end pt-2">
+                            <button type="submit" class="w-full md:w-auto inline-flex justify-center rounded-md border border-transparent bg-green-600 py-3 px-6 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
+                                Generate Fattening Plan | মোটাতাজাকরণ পরিকল্পনা তৈরি করুন
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Results Section -->
+        <div id="results-container" class="hidden mt-10">
+            <div class="flex justify-between items-center mb-4">
+                 <h2 id="plan-title" class="text-3xl font-bold text-green-800">Your Custom Plan</h2>
+                 <button onclick="window.print()" class="no-print inline-flex items-center rounded-md border border-transparent bg-gray-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gray-700">
+                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
+                     Print Plan | পরিকল্পনা প্রিন্ট করুন
+                 </button>
+            </div>
+            
+            <!-- Tab Buttons -->
+            <div id="tab-buttons" class="flex flex-wrap border-b border-gray-300 no-print">
+                <button class="tab-button active" data-type="dairy" onclick="openTab(event, 'milking-tab')">Dairy Cow Plan | ডেইরি গাভীর পরিকল্পনা</button>
+                <button class="tab-button" data-type="dairy" onclick="openTab(event, 'pregnant-tab')">Pregnant Cow Plan | গর্ভবতী গাভীর পরিকল্পনা</button>
+                <button class="tab-button" data-type="dairy" onclick="openTab(event, 'dry-cow-tab')">Dry Cow Management | দুগ্ধহীন গাভীর ব্যবস্থাপনা</button>
+                <button class="tab-button" data-type="dairy" onclick="openTab(event, 'calf-tab')">Calf Management | বাছুর ব্যবস্থাপনা</button>
+                <button class="tab-button" data-type="fattening" onclick="openTab(event, 'beef-fattening-tab')">Beef Fattening Plan | গরু মোটাতাজাকরণ</button>
+                <button class="tab-button" data-type="dairy" onclick="openTab(event, 'modern-practices-tab')">Modern Practices | আধুনিক অনুশীলন</button>
+            </div>
+
+            <!-- Tab Content -->
+            <div id="milking-tab" class="tab-content active">
+                <h2 class="print-header hidden">Dairy Cow Management Plan | দুধেল গাভীর ব্যবস্থাপনা পরিকল্পনা</h2>
+                <div id="management-schedule" class="card"></div>
+                <div id="feed-requirement" class="card"></div>
+                <div id="vaccination-schedule" class="card"></div>
+                <div id="housing-requirement" class="card"></div>
+                <div id="disease-threat" class="card"></div>
+                <div id="treatment-protocol" class="card"></div>
+                <div id="milking-medicine-list" class="card"></div>
+            </div>
+
+            <div id="pregnant-tab" class="tab-content">
+                 <h2 class="print-header hidden">Pregnant Cow Management Plan | গর্ভবতী গাভীর ব্যবস্থাপনা পরিকল্পনা</h2>
+                <div id="pregnant-animal-management" class="card"></div>
+            </div>
+
+            <div id="dry-cow-tab" class="tab-content">
+                <h2 class="print-header hidden">Dry Cow Management Plan | দুগ্ধহীন গাভীর ব্যবস্থাপনা পরিকল্পনা</h2>
+               <div id="dry-cow-management" class="card"></div>
+           </div>
+
+            <div id="calf-tab" class="tab-content">
+                <h2 class="print-header hidden">Calf Management Plan | বাছুর ব্যবস্থাপনা পরিকল্পনা</h2>
+                <div id="calf-management" class="card"></div>
+            </div>
+            
+            <div id="beef-fattening-tab" class="tab-content">
+                 <h2 class="print-header hidden">Beef Fattening Management Plan | গরু মোটাতাজাকরণ ব্যবস্থাপনা পরিকল্পনা</h2>
+                 <div id="fattening-schedule-card" class="card"></div>
+                 <div id="fattening-feed-card" class="card"></div>
+                 <div id="fattening-health-card" class="card"></div>
+                 <div id="fattening-housing-card" class="card"></div>
+                 <div id="fattening-pharmacy-card" class="card"></div>
+            </div>
+
+             <div id="modern-practices-tab" class="tab-content">
+                <h2 class="print-header hidden">Modern Farm Practices | আধুনিক খামার অনুশীলন</h2>
+                <div id="bcs-card" class="card"></div>
+                <div id="hoof-care-card" class="card"></div>
+                <div id="biosecurity-card" class="card"></div>
+            </div>
+            
+            <footer class="mt-8 text-center text-sm text-gray-500">
+                <p><strong>Disclaimer:</strong> This is a generalized guide. For specific health issues or critical conditions, please consult a registered veterinarian immediately. এই নির্দেশিকাটি সাধারণ তথ্যের জন্য। যেকোনো গুরুতর স্বাস্থ্য সমস্যা বা জরুরি অবস্থার জন্য, অবিলম্বে একজন রেজিস্টার্ড পশুচিকিৎসকের সাথে পরামর্শ করুন।</p>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('cow-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const cattleCount = parseInt(document.getElementById('cattleCount').value);
+            const receivedDate = new Date(document.getElementById('receivedDate').value);
+            const bodyWeight = parseFloat(document.getElementById('bodyWeight').value);
+            const milkProduction = parseFloat(document.getElementById('milkProduction').value);
+            
+            if (isNaN(cattleCount) || isNaN(bodyWeight) || isNaN(milkProduction) || !receivedDate.getTime()) {
+                alert("Please fill in all fields with valid data.");
+                return;
+            }
+            
+            document.getElementById('results-container').classList.remove('hidden');
+            document.getElementById('plan-title').innerText = "Your Custom Dairy Management Plan";
+            
+            displayMilkingCowPlan(receivedDate, bodyWeight, milkProduction, cattleCount);
+            displayPregnantCowPlan();
+            displayDryCowPlan();
+            displayCalfPlan();
+            displayModernPractices();
+
+            document.querySelectorAll('#tab-buttons .tab-button').forEach(btn => {
+                if (btn.dataset.type === 'fattening') {
+                    btn.classList.add('hidden');
+                } else {
+                    btn.classList.remove('hidden');
+                }
+            });
+            openTab(null, 'milking-tab', true);
+            document.getElementById('results-container').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        document.getElementById('fattening-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const cattleCount = parseInt(document.getElementById('fatteningCattleCount').value);
+            const startDate = new Date(document.getElementById('startDate').value);
+            const initialWeight = parseFloat(document.getElementById('initialWeight').value);
+            const period = parseInt(document.getElementById('fatteningPeriod').value);
+            const adg = parseFloat(document.getElementById('adg').value);
+            
+             if (isNaN(cattleCount) || isNaN(initialWeight) || isNaN(period) || isNaN(adg) || !startDate.getTime()) {
+                alert("Please fill in all fields with valid data.");
+                return;
+            }
+
+            document.getElementById('results-container').classList.remove('hidden');
+            document.getElementById('plan-title').innerText = "Your Custom Beef Fattening Plan";
+
+            displayFatteningPlan(startDate, initialWeight, period, adg, cattleCount);
+
+            document.querySelectorAll('#tab-buttons .tab-button').forEach(btn => {
+                if (btn.dataset.type === 'dairy') {
+                     btn.classList.add('hidden');
+                } else {
+                    btn.classList.remove('hidden');
+                }
+            });
+             openTab(null, 'beef-fattening-tab', true);
+             document.getElementById('results-container').scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        document.getElementById('receivedDate').valueAsDate = new Date();
+        document.getElementById('startDate').valueAsDate = new Date();
+
+        function openTab(evt, tabName, forceOpen = false) {
+            let i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tab-button");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            
+            if (evt) {
+                 evt.currentTarget.className += " active";
+            } else if (forceOpen) {
+                 document.querySelector(`[onclick*="openTab(event, '${tabName}'"]`).classList.add('active');
+            }
+        }
+        
+        // --- Beef Fattening Content Functions ---
+        function displayFatteningPlan(startDate, initialWeight, period, adg, cattleCount) {
+             displayFatteningSchedule(startDate, period);
+             displayFatteningFeed(initialWeight, adg, period, cattleCount);
+             displayFatteningHealth(startDate);
+             displayFatteningHousing(cattleCount);
+             displayFatteningPharmacy();
+        }
+
+        function displayFatteningSchedule(startDate, period) {
+            const container = document.getElementById('fattening-schedule-card');
+            let schedule = [
+                { month: "Month 1 | প্রথম মাস", tasks: "Initial deworming with broad-spectrum anthelmintic and Ivermectin injection. Start FMD vaccination. Begin with high roughage diet and gradually increase concentrate. Introduce Urea Molasses Straw (UMS)." },
+                { month: "Month 2 | দ্বিতীয় মাস", tasks: "Administer Anthrax & HS/BQ vaccines. Increase concentrate proportion in the diet. Monitor weight gain and animal health daily. Ensure constant supply of clean water." },
+                { month: "Month 3 | তৃতীয় মাস", tasks: "Diet should be high in energy (more concentrate). Check for any signs of acidosis or bloat. Provide liver tonic to support metabolism. Final month of intense feeding." }
+            ];
+            if (period === 4) {
+                schedule.push({ month: "Month 4 | চতুর্থ মাস", tasks: "Maximize concentrate feed for final weight gain. Reduce animal movement to conserve energy. Prepare for marketing." });
+            }
+
+            container.innerHTML = `
+                <div class="card-header">
+                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0h18" /></svg>
+                    <h2>Fattening Management Schedule | মোটাতাজাকরণ ব্যবস্থাপনা</h2>
+                </div>
+                <div class="overflow-x-auto"><table class="table-auto w-full text-left">
+                    <thead><tr><th class="px-4 py-2">Period | সময়কাল</th><th class="px-4 py-2">Key Activities | কার্যক্রম</th></tr></thead>
+                    <tbody>${schedule.map(item => `<tr class="border-b"><td class="px-4 py-2 font-medium">${item.month}</td><td class="px-4 py-2">${item.tasks}</td></tr>`).join('')}</tbody>
+                </table></div>`;
+        }
+        
+        function displayFatteningFeed(initialWeight, adg, period, cattleCount) {
+            const container = document.getElementById('fattening-feed-card');
+            const finalWeight = initialWeight + (adg * period * 30);
+            const avgWeight = (initialWeight + finalWeight) / 2;
+            const dmi = avgWeight * 0.025; // Dry Matter Intake
+            const concentrate = dmi * 0.6;
+            const roughage = dmi * 0.4;
+
+            const feed = [
+                { item: "Concentrate Feed | দানাদার", perCow: `${concentrate.toFixed(2)} kg`, total: `${(concentrate * cattleCount).toFixed(2)} kg` },
+                { item: "Urea Molasses Straw (UMS) | ইউএমএস", perCow: `${(roughage * 2.5).toFixed(2)} kg`, total: `${(roughage * 2.5 * cattleCount).toFixed(2)} kg` },
+                { item: "Green Fodder | কাঁচা ঘাস", perCow: `2-3 kg`, total: `${(2.5 * cattleCount).toFixed(2)} kg` },
+                { item: "Mineral Mixture | খনিজ লবণ", perCow: `30-50 gm`, total: `${(40 * cattleCount) / 1000} kg` }
+            ];
+
+             container.innerHTML = `
+                <div class="card-header">
+                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" /></svg>
+                    <h2>Average Daily Feed Requirement | গড় দৈনিক খাদ্য চাহিদা</h2>
+                </div>
+                 <p class="mb-4 text-sm text-gray-600">This is an average requirement. Adjust based on animal appetite and growth. Feed should be split into 2-3 meals.</p>
+                <div class="overflow-x-auto"><table class="table-auto w-full text-left">
+                     <thead><tr><th class="px-4 py-2">Feed | খাদ্য</th><th class="px-4 py-2">Per Animal | প্রতি পশু</th><th class="px-4 py-2">Total for ${cattleCount} Animal(s)</th></tr></thead>
+                    <tbody>${feed.map(f => `<tr class="border-b"><td class="px-4 py-2 font-medium">${f.item}</td><td class="px-4 py-2">${f.perCow}</td><td class="px-4 py-2">${f.total}</td></tr>`).join('')}</tbody>
+                </table></div>
+                 <div class="mt-4">
+                    <h3 class="font-semibold text-lg text-gray-800 mb-2">How to Make UMS | ইউএমএস তৈরির পদ্ধতি</h3>
+                    <p class="text-gray-700">For 10 kg of dry straw (খড়):</p>
+                    <ul class="list-decimal list-inside ml-4 mt-2 text-gray-700">
+                        <li>Take 10 kg of chopped dry straw.</li>
+                        <li>Dissolve 300g of Urea (ইউরিয়া) and 1.5 kg of Molasses (চিটাগুড়) in 5-6 Liters of water.</li>
+                        <li>Sprinkle the solution on the straw and mix thoroughly.</li>
+                        <li>Cover and ferment for 7-10 days before feeding.</li>
+                    </ul>
+                </div>`;
+        }
+
+        function displayFatteningHealth(startDate) {
+             const container = document.getElementById('fattening-health-card');
+            const addDays = (date, days) => new Date(date.getTime() + days * 24 * 60 * 60 * 1000).toLocaleDateString('en-GB');
+            const vaccines = [
+                { name: "Deworming | কৃমিনাশক", schedule: `On Day 2-3: Broad-spectrum anthelmintic (<strong>Almex/Triven</strong>) and Ivermectin (<strong>Vermic</strong>) injection.`, notes: "Crucial first step." },
+                { name: "FMD | ক্ষুরা রোগ", schedule: `First dose around Day 7-10 (${addDays(startDate, 7)}). Booster after 21 days.`, notes: "Mandatory for prevention." },
+                { name: "Anthrax | তরকা রোগ", schedule: `Around Day 25-30 (${addDays(startDate, 25)}). Annually.`, notes: "In endemic areas." },
+                { name: "HS & BQ | গলাফুলা ও বাদলা", schedule: `Around Day 45-50 (${addDays(startDate, 45)}). Annually.`, notes: "Important before monsoon." }
+            ];
+             container.innerHTML = `
+                <div class="card-header">
+                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 0 0-3.7-3.7 48.678 48.678 0 0 0-7.324 0 4.006 4.006 0 0 0-3.7 3.7c-.092 1.21-.138 2.43-.138 3.662a4.006 4.006 0 0 0 3.7 3.7 48.656 48.656 0 0 0 7.324 0 4.006 4.006 0 0 0 3.7-3.7Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /></svg>
+                    <h2>Health & Vaccination Schedule | স্বাস্থ্য ও টিকার সময়সূচী</h2>
+                </div>
+                <div class="overflow-x-auto"><table class="table-auto w-full text-left">
+                     <thead><tr><th class="px-4 py-2">Action | টিকা/ঔষধ</th><th class="px-4 py-2">Schedule | সময়সূচী</th><th class="px-4 py-2">Notes | মন্তব্য</th></tr></thead>
+                    <tbody>${vaccines.map(v => `<tr class="border-b"><td class="px-4 py-2 font-medium">${v.name}</td><td class="px-4 py-2">${v.schedule}</td><td class="px-4 py-2">${v.notes}</td></tr>`).join('')}</tbody>
+                </table></div>`;
+        }
+
+        function displayFatteningHousing(count) {
+            const container = document.getElementById('fattening-housing-card');
+            const coveredArea = 40, openArea = 80;
+            container.innerHTML = `
+                <div class="card-header">
+                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h7.5" /></svg>
+                    <h2>Total Housing Requirements | মোট বাসস্থান প্রয়োজন</h2>
+                </div>
+                <ul class="list-disc list-inside space-y-2 text-gray-700">
+                    <li><strong>Total Covered Area | মোট ছাউনি:</strong> <strong>${(coveredArea * count).toLocaleString()}</strong> sq. ft.</li>
+                    <li><strong>Total Open Paddock | মোট খোলা জায়গা:</strong> <strong>${(openArea * count).toLocaleString()}</strong> sq. ft.</li>
+                </ul>`;
+        }
+
+        function displayFatteningPharmacy() {
+             const container = document.getElementById('fattening-pharmacy-card');
+            const meds = [
+                { category: "Anthelmintics | কৃমিনাশক", generic: "Triclabendazole+Levamisole, Ivermectin", brand: "Levadex Plus, Vermic" },
+                { category: "Liver Tonic | লিভার টনিক", generic: "B-Complex + Choline Chloride", brand: "Livatone, Bio-Liv" },
+                { category: "Appetite Stimulant | রুচিবর্ধক", generic: "Vitamin B-Complex Injection", brand: "B-Plex Vet, Rumen-FS" },
+                { category: "Anti-bloat Agent | পেট ফাঁপা রোধক", generic: "Simethicone Emulsion", brand: "Bloat Stop, Bloatosil" },
+                { category: "Pain & Fever (NSAID) | ব্যথা ও জ্বর", generic: "Meloxicam / Ketoprofen", brand: "Mel-Vet, Keto-A Vet" },
+                { category: "Topical Antiseptic | জীবাণুনাশক (বাহ্যিক)", generic: "Povidone-Iodine / Negasunt Powder", brand: "Povisept, D-mag" }
+            ];
+            container.innerHTML = `
+                <div class="card-header">
+                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
+                    <h2>Fattening - Essential Pharmacy | প্রয়োজনীয় ঔষধ</h2>
+                </div>
+                 <p class="mb-4 text-sm text-gray-600"><strong>Important:</strong> Keep these medicines on hand for quick response, under veterinary guidance.</p>
+                <div class="overflow-x-auto"><table class="table-auto w-full text-left">
+                    <thead><tr><th class="px-4 py-2">Category | প্রকার</th><th class="px-4 py-2">Generic Name / Type</th><th class="px-4 py-2">BD Brand Name</th></tr></thead>
+                    <tbody>${meds.map(m => `<tr class="border-b"><td class="px-4 py-2">${m.category}</td><td class="px-4 py-2">${m.generic}</td><td class="px-4 py-2">${m.brand}</td></tr>`).join('')}</tbody>
+                </table></div>`;
+        }
+
+        // --- Dairy Content Functions (Existing) ---
+        function displayMilkingCowPlan(receivedDate, bodyWeight, milkProduction, cattleCount) {
+            displayManagementSchedule();
+            displayFeedRequirement(bodyWeight, milkProduction, cattleCount);
+            displayVaccinationSchedule(receivedDate);
+            displayHousingRequirement(cattleCount);
+            displayDiseaseThreats();
+            displayTreatmentProtocols();
+            displayMilkingMedicineList();
+        }
+
+        function displayManagementSchedule() {
+            const container = document.getElementById('management-schedule');
+            const schedule = [
+                { period: "Week 1 (After Arrival) | প্রথম সপ্তাহ", tasks: "Strict isolation (কোয়ারেন্টাইন). Observe for stress/disease. Provide clean water, good quality hay only for first 2-3 days, then slowly introduce concentrate. Deworming with a broad-spectrum anthelmintic (e.g., Albendazole + Triclabendazole)." },
+                { period: "Week 2 | দ্বিতীয় সপ্তাহ", tasks: "Continue observation. Check for external parasites (ticks, lice) and treat if necessary (e.g., Ivermectin injection). Gradually increase concentrate feed to the calculated amount. Prepare for FMD vaccination." },
+                { period: "Week 3 | তৃতীয় সপ্তাহ", tasks: "Administer first FMD vaccine dose. Monitor for any mild reactions. Ensure balanced nutrition and provide mineral mixture regularly. Observe for heat signs if the cow is not pregnant." },
+                { period: "Week 4 | চতুর্থ সপ্তাহ", tasks: "The cow should be acclimatized. Continue with the calculated balanced diet. Prepare for Anthrax vaccination if in an endemic area. Monitor milk yield and body condition." },
+                { period: "Regular Tasks (Daily) | দৈনিক কাজ", tasks: "Clean housing & utensils. Provide fresh feed and water 2-3 times. Milking at fixed times. Observe animal behavior and manure consistency." },
+                { period: "Monthly Tasks | মাসিক কাজ", tasks: "Record milk production & feed intake. Check body condition score. Check hooves and trim if needed. Repeat deworming based on veterinary advice (usually every 3-4 months)." }
+            ];
+            container.innerHTML = `
+                <div class="card-header">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0_0_24_24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0h18" /></svg>
+                    <h2>General Management | সাধারণ ব্যবস্থাপনা</h2>
+                </div>
+                <div class="overflow-x-auto"><table class="table-auto w-full text-left">
+                    <thead><tr><th class="px-4 py-2">Time Period | সময়কাল</th><th class="px-4 py-2">Key Activities | কার্যক্রম</th></tr></thead>
+                    <tbody>${schedule.map(item => `<tr class="border-b"><td class="px-4 py-2 font-medium">${item.period}</td><td class="px-4 py-2">${item.tasks}</td></tr>`).join('')}</tbody>
+                </table></div>`;
+        }
+        
+        function displayPregnantCowPlan() {
+            const container = document.getElementById('pregnant-animal-management');
+            const care = [
+                { stage: "Late Pregnancy (7-9 months) | শেষ ৩ মাস", tasks: "<strong>Critical Period.</strong> Increase concentrate feed by 1-2 kg (steaming up). Provide high-quality mineral mixture (e.g., <strong>Min-A-Vet, Rumicare</strong>)." },
+                { stage: "Pre-Calving (1-2 weeks before) | প্রসবের পূর্বে", tasks: "Move to a clean, dry, separate calving pen with soft bedding (straw). Observe closely for calving signs." }
+            ];
+            const health = [
+                { time: "45-60 days pre-calving", action: "Booster vaccine for E.coli, Rota-Coronavirus to enrich colostrum. (Consult vet for availability)." },
+                { time: "30 days pre-calving", action: "Vitamin ADE & Selenium injection (e.g., <strong>Inject-ADE, E-Sel</strong>) to prevent retained placenta." }
+            ];
+            const deworming = [
+                { 
+                    generic: "Fenbendazole",
+                    brand: "Fenazol, Bendazol Vet",
+                    dose: "5 - 7.5 mg per kg body weight (Oral Bolus)",
+                    safety: "<strong class='text-green-600'>SAFE</strong> throughout pregnancy. Good choice for routine deworming."
+                },
+                { 
+                    generic: "Ivermectin",
+                    brand: "Vermic, Ivermec",
+                    dose: "1 ml per 50 kg body weight (Subcutaneous Injection)",
+                    safety: "<strong class='text-green-600'>SAFE</strong> throughout pregnancy. Effective against internal and external parasites."
+                },
+                { 
+                    generic: "Albendazole / Triclabendazole",
+                    brand: "Almex / Triven",
+                    dose: "10-15 mg per kg body weight (Oral Bolus)",
+                    safety: "<strong class='text-red-600'>AVOID</strong> during the first 45 days (first trimester) of pregnancy. Can be used in mid to late pregnancy under vet supervision."
+                }
+            ];
+            container.innerHTML = `
+                 <div class="card-header">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345h5.364c.518 0 .734.654.372 1.014l-4.341 3.16a.563.563 0 0 0-.182.643l2.125 5.111a.563.563 0 0 1-.84.622l-4.34-3.16a.563.563 0 0 0-.676 0l-4.34 3.16a.563.563 0 0 1-.84-.622l2.125-5.111a.563.563 0 0 0-.182-.643l-4.341-3.16a.563.563 0 0 1 .372-1.014h5.364a.563.563 0 0 0 .475-.345L11.48 3.5Z" /></svg>
+                    <h2>Pregnant Animal Management | গর্ভবতী পশুর ব্যবস্থাপনা</h2>
+                </div>
+                <h3 class="font-semibold text-lg text-gray-800 mb-2 mt-4">Management by Stage | পর্যায় ভিত্তিক ব্যবস্থাপনা</h3>
+                <div class="overflow-x-auto mb-4"><table class="table-auto w-full text-left">
+                    <thead><tr><th class="px-4 py-2">Stage | পর্যায়</th><th class="px-4 py-2">Management Tasks | করণীয়</th></tr></thead>
+                    <tbody>${care.map(item => `<tr class="border-b"><td class="px-4 py-2 font-medium">${item.stage}</td><td class="px-4 py-2">${item.tasks}</td></tr>`).join('')}</tbody>
+                </table></div>
+                <h3 class="font-semibold text-lg text-gray-800 mb-2 mt-4">Health & Medicine Schedule | স্বাস্থ্য ও ঔষধ প্রয়োগ</h3>
+                <div class="overflow-x-auto mb-4"><table class="table-auto w-full text-left">
+                     <thead><tr><th class="px-4 py-2">Time | সময়</th><th class="px-4 py-2">Action | করণীয়</th></tr></thead>
+                    <tbody>${health.map(item => `<tr class="border-b"><td class="px-4 py-2 font-medium">${item.time}</td><td class="px-4 py-2">${item.action}</td></tr>`).join('')}</tbody>
+                </table></div>
+                <h3 class="font-semibold text-lg text-gray-800 mb-2 mt-4">Anthelmintic (Deworming) Guide | কৃমিনাশক নির্দেশিকা</h3>
+                <div class="overflow-x-auto"><table class="table-auto w-full text-left">
+                     <thead>
+                        <tr>
+                            <th class="px-4 py-2">Generic Name | জেনেরিক নাম</th>
+                            <th class="px-4 py-2">BD Brand Name | ব্র্যান্ড নাম</th>
+                            <th class="px-4 py-2">Dose | ডোজ</th>
+                            <th class="px-4 py-2">Pregnancy Safety | গর্ভাবস্থায় সুরক্ষা</th>
+                        </tr>
+                    </thead>
+                    <tbody>${deworming.map(d => `<tr class="border-b">
+                        <td class="px-4 py-2 font-medium">${d.generic}</td>
+                        <td class="px-4 py-2">${d.brand}</td>
+                        <td class="px-4 py-2">${d.dose}</td>
+                        <td class="px-4 py-2">${d.safety}</td>
+                    </tr>`).join('')}</tbody>
+                </table></div>
+                <p class="mt-2 text-sm text-gray-600"><strong>Note:</strong> Always calculate dose accurately based on the cow's current body weight. Consult a veterinarian before administering any medicine. ওজনের উপর ভিত্তি করে সঠিক ডোজ গণনা করুন এবং ঔষধ প্রয়োগের আগে সর্বদা পশুচিকিৎসকের পরামর্শ নিন।</p>
+                `;
+        }
+
+        function displayDryCowPlan() {
+            const container = document.getElementById('dry-cow-management');
+            const goals = [
+                "Allow udder tissue to regenerate for the next lactation (ওলান পুনর্গঠন).",
+                "Support rapid fetal growth in late pregnancy (গর্ভের বাছুরের বৃদ্ধি).",
+                "Build cow's body condition score (BCS) (শারীরিক অবস্থার উন্নতি).",
+                "Ensure production of high-quality colostrum (শালদুধের গুণমান বৃদ্ধি)."
+            ];
+            const phases = [
+                { phase: "Early Dry Period (first 30-40 days) | প্রথম পর্যায়", feeding: "High fiber, low energy diet. Primarily good quality hay or straw. Restrict concentrate feed and high-calcium green fodder. Provide clean water and mineral block.", management: "Monitor for any signs of mastitis after drying off. House in a comfortable, clean, and less crowded area." },
+                { phase: "Transition Period (last 21 days before calving) | শেষ পর্যায়", feeding: "<strong>Crucial Phase.</strong> Gradually re-introduce and increase concentrate feed (1-2 kg/day, 'steaming up'). This adapts the rumen microbes. Introduce feeds that will be in the milking ration. Use of anionic salts can help prevent milk fever.", management: "Move to a clean, separate calving pen. Observe closely for calving signs (udder filling, restlessness)." }
+            ];
+             const dryingOff = [
+                { step: "1", action: "Abruptly stop milking. Do not milk intermittently as this stimulates more milk production." },
+                { step: "2", action: "After the final milking, thoroughly clean and disinfect each teat end with an alcohol swab." },
+                { step: "3", action: "Infuse a long-acting intramammary antibiotic ('Dry Cow Therapy') into each quarter. <strong>Generic:</strong> Cloxacillin Benzathine. <strong>BD Brands:</strong> Cloxavet-DC, Mastinil-DC, Dryclox." },
+                { step: "4", action: "After infusion, dip the teats in an antiseptic teat dip solution. If available, an external teat sealant can be applied." }
+            ];
+            container.innerHTML = `
+                <div class="card-header">
+                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" /></svg>
+                    <h2>Dry Cow Management | দুগ্ধহীন গাভীর ব্যবস্থাপনা</h2>
+                </div>
+                <p class="mb-4 text-gray-700">The dry period (typically 60 days before calving) is a vital resting phase that determines the health and productivity of the next lactation cycle.</p>
+                <h3 class="font-semibold text-lg text-gray-800 mb-2">Primary Goals of the Dry Period | মূল উদ্দেশ্য</h3>
+                <ul class="list-disc list-inside space-y-1 mb-4">${goals.map(g => `<li>${g}</li>`).join('')}</ul>
+                
+                <h3 class="font-semibold text-lg text-gray-800 mb-2">Drying Off Procedure | দুধ শুকানোর পদ্ধতি</h3>
+                <div class="overflow-x-auto mb-4"><table class="table-auto w-full text-left">
+                    <thead><tr><th class="px-4 py-2">Step | ধাপ</th><th class="px-4 py-2">Action | করণীয়</th></tr></thead>
+                    <tbody>${dryingOff.map(d => `<tr class="border-b"><td class="px-4 py-2 font-medium">${d.step}</td><td class="px-4 py-2">${d.action}</td></tr>`).join('')}</tbody>
+                </table></div>
+
+                <h3 class="font-semibold text-lg text-gray-800 mb-2 mt-4">Management by Phase | পর্যায় ভিত্তিক ব্যবস্থাপনা</h3>
+                <div class="overflow-x-auto"><table class="table-auto w-full text-left">
+                    <thead><tr><th class="px-4 py-2">Phase | পর্যায়</th><th class="px-4 py-2">Feeding Strategy | খাদ্য ব্যবস্থাপনা</th><th class="px-4 py-2">Management | সাধারণ ব্যবস্থাপনা</th></tr></thead>
+                    <tbody>${phases.map(p => `<tr class="border-b"><td class="px-4 py-2 font-medium">${p.phase}</td><td class="px-4 py-2">${p.feeding}</td><td class="px-4 py-2">${p.management}</td></tr>`).join('')}</tbody>
+                </table></div>
+                `;
+        }
+        
+        function displayCalfPlan() {
+            const container = document.getElementById('calf-management');
+            const initialCare = [
+                { step: "Step 1 | ধাপ ১", action: "<strong>Birth:</strong> Clear mouth/nose of mucus. If not breathing, rub chest & tickle nostril." },
+                { step: "Step 2 | ধাপ ২", action: "<strong>Navel Dipping | নাভি জীবানুমুক্তকরণ:</strong> Dip umbilical cord in 7% Tincture of Iodine (e.g., <strong>Povisept</strong>) immediately and for 2 more days." },
+                { step: "Step 3 | ধাপ ৩", action: "<strong>Colostrum Feeding | শালদুধ খাওয়ানো:</strong> Crucial! Feed 10% of body weight within 1-2 hours of birth. (30kg calf needs 3 Liters)." }
+            ];
+            const feedingSchedule = [
+                { age: "Day 1-3 | দিন ১-৩", feed: "Colostrum (শালদুধ) only, 3-4 times a day." },
+                { age: "Day 4 - Week 4", feed: "Whole milk/milk replacer (10% of body weight). Introduce calf starter feed." },
+                { age: "Weaning (10-12 Weeks) | দুধ ছাড়ানো", feed: "Stop milk when calf eats 1-1.5 kg of calf starter daily." }
+            ];
+             const healthSchedule = [
+                { age: "1-2 weeks", action: "Dehorning (শিঙ তোলা) is easiest at this age." },
+                { age: "4 weeks", action: "First deworming (e.g., <strong>Almex-vet, Levavet</strong>)." },
+                { age: "4 months", action: "First FMD vaccination. Follow with HS, BQ as per main schedule." }
+            ];
+            container.innerHTML = `
+                <div class="card-header">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12.156-6.75 20.25m11.13-9.598a3.75 3.75 0 1 0-5.303 5.304L3 20.25m9.12-9.6a3.75 3.75 0 1 0-5.303 5.304L3 20.25" /><path stroke-linecap="round" stroke-linejoin="round" d="M17.66 3.078a3.75 3.75 0 0 0-5.303 0l-1.12 1.121a3.75 3.75 0 0 0 5.304 5.304l1.12-1.12a3.75 3.75 0 0 0 0-5.304Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12.12 9.18a3.75 3.75 0 1 0-5.303 5.304L3 20.25" /></svg>
+                    <h2>Calf Management (Birth to Weaning) | বাছুর ব্যবস্থাপনা</h2>
+                </div>
+                <h3 class="font-semibold text-lg text-gray-800 mb-2">Initial Care | প্রাথমিক যত্ন</h3>
+                <div class="overflow-x-auto mb-4"><table class="table-auto w-full text-left">
+                    <thead><tr><th class="px-4 py-2">Step | ধাপ</th><th class="px-4 py-2">Action | করণীয়</th></tr></thead>
+                    <tbody>${initialCare.map(item => `<tr class="border-b"><td class="px-4 py-2 font-medium">${item.step}</td><td class="px-4 py-2">${item.action}</td></tr>`).join('')}</tbody>
+                </table></div>
+                <h3 class="font-semibold text-lg text-gray-800 mb-2">Feeding Schedule | খাবার তালিকা</h3>
+                 <div class="overflow-x-auto mb-4"><table class="table-auto w-full text-left">
+                    <thead><tr><th class="px-4 py-2">Age | বয়স</th><th class="px-4 py-2">Feed Details | খাবার</th></tr></thead>
+                    <tbody>${feedingSchedule.map(item => `<tr class="border-b"><td class="px-4 py-2 font-medium">${item.age}</td><td class="px-4 py-2">${item.feed}</td></tr>`).join('')}</tbody>
+                </table></div>
+                 <h3 class="font-semibold text-lg text-gray-800 mb-2">Health Schedule | স্বাস্থ্য সুরক্ষা</h3>
+                 <div class="overflow-x-auto"><table class="table-auto w-full text-left">
+                    <thead><tr><th class="px-4 py-2">Age | বয়স</th><th class="px-4 py-2">Action | করণীয়</th></tr></thead>
+                    <tbody>${healthSchedule.map(item => `<tr class="border-b"><td class="px-4 py-2 font-medium">${item.age}</td><td class="px-4 py-2">${item.action}</td></tr>`).join('')}</tbody>
+                </table></div>`;
+        }
+        
+        function displayModernPractices() {
+            // Body Condition Scoring Card
+            const bcsContainer = document.getElementById('bcs-card');
+            const bcsScores = [
+                { score: "1 (Thin) | কঙ্কালসার", description: "Deep cavity around tail head. No fatty tissue felt. Bones are sharp and prominent." },
+                { score: "2 (Slender) | পাতলা", description: "Shallow cavity around tail head. Some tissue felt. Bones are prominent but have some covering." },
+                { score: "3 (Ideal) | আদর্শ", description: "No cavity at tail head. Fat cover is easily felt. Bones are smooth and well-covered." },
+                { score: "4 (Fat) | মোটাসোটা", description: "Folds of fatty tissue are visible around tail head. Bone structure is hard to feel." },
+                { score: "5 (Obese) | স্থুলকায়", description: "Tail head is buried in fat. Bone structure cannot be felt at all." }
+            ];
+            const bcsTargets = [
+                { stage: "Calving | প্রসবের সময়", target: "3.0 - 3.5" },
+                { stage: "Peak Lactation | সর্বোচ্চ দুধ উৎপাদন", target: "2.5 - 3.0" },
+                { stage: "Mid-Lactation | মাঝামাঝি সময়", target: "2.75 - 3.25" },
+                { stage: "Dry-Off | দুধ শুকানোর সময়", target: "3.0 - 3.5" }
+            ];
+            bcsContainer.innerHTML = `
+                <div class="card-header">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" /></svg>
+                    <h2>Body Condition Scoring (BCS) | শারীরিক অবস্থা মূল্যায়ন</h2>
+                </div>
+                <p class="mb-4 text-gray-700">BCS is a visual and tactile method to assess a cow's fat reserves. It is a critical tool for managing nutrition, health, and fertility. Score monthly.</p>
+                <h3 class="font-semibold text-lg text-gray-800 mb-2">BCS Scoring Chart (1-5 Scale)</h3>
+                <div class="overflow-x-auto mb-4"><table class="table-auto w-full text-left">
+                    <thead><tr><th class="px-4 py-2">Score | স্কোর</th><th class="px-4 py-2">Description | বিবরণ</th></tr></thead>
+                    <tbody>${bcsScores.map(s => `<tr class="border-b"><td class="px-4 py-2 font-medium">${s.score}</td><td class="px-4 py-2">${s.description}</td></tr>`).join('')}</tbody>
+                </table></div>
+                <h3 class="font-semibold text-lg text-gray-800 mb-2">Target Scores | লক্ষ্যমাত্রা</h3>
+                <div class="overflow-x-auto"><table class="table-auto w-full text-left">
+                    <thead><tr><th class="px-4 py-2">Lactation Stage | পর্যায়</th><th class="px-4 py-2">Target BCS | আদর্শ স্কোর</th></tr></thead>
+                    <tbody>${bcsTargets.map(t => `<tr class="border-b"><td class="px-4 py-2 font-medium">${t.stage}</td><td class="px-4 py-2">${t.target}</td></tr>`).join('')}</tbody>
+                </table></div>`;
+
+            // Hoof Care Card
+            const hoofCareContainer = document.getElementById('hoof-care-card');
+            hoofCareContainer.innerHTML = `
+                <div class="card-header">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12.75 19.5v-.75a7.5 7.5 0 0 0-7.5-7.5H4.5m0-6.75h.75c7.87 0 14.25 6.38 14.25 14.25v.75M6 18.75a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" /></svg>
+                    <h2>Hoof Care & Lameness Prevention | ক্ষুর যত্ন ও খোঁড়া রোগ প্রতিরোধ</h2>
+                </div>
+                <p class="mb-4 text-gray-700">Lameness is a major cause of pain and production loss. Proactive hoof care is essential for a profitable farm.</p>
+                <ul class="list-disc list-inside space-y-2 text-gray-700">
+                    <li><strong>Regular Hoof Trimming:</strong> At least once or twice a year, especially before the dry period.</li>
+                    <li><strong>Footbath Use:</strong> A shallow bath at the entry/exit of the milking parlor or shed helps kill bacteria.
+                        <ul class="list-decimal list-inside ml-6 mt-1">
+                            <li><strong>Solution:</strong> 5% Copper Sulphate (তুঁতে) solution is common. Mix 500g of Copper Sulphate in 10 Liters of water.</li>
+                            <li><strong>Frequency:</strong> Use for 3-4 consecutive days every week.</li>
+                            <li><strong>Important:</strong> Keep the solution clean and ensure the path to the footbath is not slippery.</li>
+                        </ul>
+                    </li>
+                     <li><strong>Housing:</strong> Ensure floors are not slippery, are cleaned regularly, and provide soft bedding areas.</li>
+                </ul>`;
+
+            // Biosecurity Card
+            const biosecurityContainer = document.getElementById('biosecurity-card');
+            const biosecurityPoints = [
+                { point: "Isolate New Animals | নতুন পশু পৃথক রাখা", detail: "Quarantine all new animals for at least 30 days. Vaccinate and deworm them before mixing with the main herd." },
+                { point: "Control Access | প্রবেশ নিয়ন্ত্রণ", detail: "Limit visitors. Ensure any visitor or vehicle entering the farm uses a disinfectant footbath or tire bath." },
+                { point: "Clean Feed & Water | পরিষ্কার খাদ্য ও পানি", detail: "Protect feed stores from birds, rodents, and moisture. Regularly clean water troughs." },
+                { point: "Pest Control | পোকামাকড় নিয়ন্ত্রণ", detail: "Implement a rodent and fly control program. Pests can spread diseases." },
+                { point: "Separate Sick Animals | অসুস্থ পশু আলাদা করা", detail: "Immediately move sick animals to a separate 'hospital' pen. Use separate equipment for them." },
+                { point: "Manure Management | গোবর ব্যবস্থাপনা", detail: "Clean sheds daily. Store manure away from animal housing and feed stores to reduce flies and disease spread." }
+            ];
+            biosecurityContainer.innerHTML = `
+                 <div class="card-header">
+                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.286Z" /></svg>
+                    <h2>Farm Biosecurity | খামারের জৈব নিরাপত্তা</h2>
+                </div>
+                <p class="mb-4 text-gray-700">Biosecurity means taking steps to prevent diseases from entering or spreading within your farm. It is one of the most important investments for farm sustainability.</p>
+                <div class="overflow-x-auto"><table class="table-auto w-full text-left">
+                    <thead><tr><th class="px-4 py-2">Practice | অনুশীলন</th><th class="px-4 py-2">Details | বিস্তারিত</th></tr></thead>
+                    <tbody>${biosecurityPoints.map(p => `<tr class="border-b"><td class="px-4 py-2 font-medium">${p.point}</td><td class="px-4 py-2">${p.detail}</td></tr>`).join('')}</tbody>
+                </table></div>`;
+        }
+
+        function displayVaccinationSchedule(startDate) {
+            const container = document.getElementById('vaccination-schedule');
+            const addDays = (date, days) => new Date(date.getTime() + days * 24 * 60 * 60 * 1000).toLocaleDateString('en-GB');
+            const vaccines = [
+                { name: "FMD | ক্ষুরা রোগ", schedule: `First dose around ${addDays(startDate, 15)}. Booster after 21 days. Then every 6 months.`, notes: "Very important." },
+                { name: "Anthrax | তরকা রোগ", schedule: `First dose around ${addDays(startDate, 30)}. Then annually.`, notes: "In anthrax-prone areas." },
+                { name: "HS | গলাফুলা", schedule: `Around ${addDays(startDate, 45)}. Annually before monsoon.`, notes: "Crucial before rainy season." },
+                { name: "BQ | বাদলা রোগ", schedule: `Around ${addDays(startDate, 60)}. Annually before monsoon.`, notes: "For young cattle." }
+            ];
+            container.innerHTML = `
+                <div class="card-header">
+                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 0 0-3.7-3.7 48.678 48.678 0 0 0-7.324 0 4.006 4.006 0 0 0-3.7 3.7c-.092 1.21-.138 2.43-.138 3.662a4.006 4.006 0 0 0 3.7 3.7 48.656 48.656 0 0 0 7.324 0 4.006 4.006 0 0 0 3.7-3.7Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /></svg>
+                    <h2>Adult Vaccination Schedule | টিকার সময়সূচী</h2>
+                </div>
+                <div class="overflow-x-auto"><table class="table-auto w-full text-left">
+                     <thead><tr><th class="px-4 py-2">Vaccine | টিকা</th><th class="px-4 py-2">Schedule | সময়সূচী</th><th class="px-4 py-2">Notes | মন্তব্য</th></tr></thead>
+                    <tbody>${vaccines.map(v => `<tr class="border-b"><td class="px-4 py-2 font-medium">${v.name}</td><td class="px-4 py-2">${v.schedule}</td><td class="px-4 py-2">${v.notes}</td></tr>`).join('')}</tbody>
+                </table></div>`;
+        }
+
+        function displayFeedRequirement(weight, milk, count) {
+            const container = document.getElementById('feed-requirement');
+            const totalConcentrate = (milk * 0.4) + 1.0;
+            const greenFodderFresh = weight * 0.05;
+            const strawFresh = weight * 0.01;
+            const mineralMixture = 50;
+            const feed = [
+                { item: "Concentrate Feed | দানাদার", perCow: `${totalConcentrate.toFixed(2)} kg`, total: `${(totalConcentrate * count).toFixed(2)} kg` },
+                { item: "Green Fodder | কাঁচা ঘাস", perCow: `${greenFodderFresh.toFixed(2)} kg`, total: `${(greenFodderFresh * count).toFixed(2)} kg` },
+                { item: "Dry Straw | খড়", perCow: `${strawFresh.toFixed(2)} kg`, total: `${(strawFresh * count).toFixed(2)} kg` },
+                { item: "Mineral Mixture | খনিজ লবণ", perCow: `${mineralMixture} gm`, total: `${(mineralMixture * count) / 1000} kg` }
+            ];
+            container.innerHTML = `
+                <div class="card-header">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" /></svg>
+                    <h2>Daily Feed Requirement | দৈনিক খাদ্য চাহিদা</h2>
+                </div>
+                <div class="overflow-x-auto"><table class="table-auto w-full text-left">
+                     <thead><tr><th class="px-4 py-2">Feed | খাদ্য</th><th class="px-4 py-2">Per Cow | প্রতি গরু</th><th class="px-4 py-2">Total for ${count} Cow(s)</th></tr></thead>
+                    <tbody>${feed.map(f => `<tr class="border-b"><td class="px-4 py-2 font-medium">${f.item}</td><td class="px-4 py-2">${f.perCow}</td><td class="px-4 py-2">${f.total}</td></tr>`).join('')}</tbody>
+                </table></div>`;
+        }
+
+        function displayHousingRequirement(count) {
+            const container = document.getElementById('housing-requirement');
+            const coveredArea = 50, openArea = 100;
+            container.innerHTML = `
+                <div class="card-header">
+                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h7.5" /></svg>
+                    <h2>Total Housing Requirements | মোট বাসস্থান প্রয়োজন</h2>
+                </div>
+                <ul class="list-disc list-inside space-y-2 text-gray-700">
+                    <li><strong>Total Covered Area | মোট ছাউনি:</strong> <strong>${(coveredArea * count).toLocaleString()}</strong> sq. ft.</li>
+                    <li><strong>Total Open Paddock | মোট খোলা জায়গা:</strong> <strong>${(openArea * count).toLocaleString()}</strong> sq. ft.</li>
+                </ul>`;
+        }
+
+        function displayDiseaseThreats() {
+            const container = document.getElementById('disease-threat');
+            const diseases = [
+                { name: "Mastitis | ওলান প্রদাহ", symptoms: "Swelling, pain in udder; abnormal milk (clots, watery)." },
+                { name: "Bloat | পেট ফাঁপা", symptoms: "Swollen left abdomen, difficulty breathing, discomfort." },
+                { name: "Milk Fever | দুগ্ধ জ্বর", symptoms: "After calving; weakness, inability to stand, cold ears." }
+            ];
+            container.innerHTML = `
+                <div class="card-header">
+                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
+                    <h2>Common Disease Threats | সাধারণ রোগের ঝুঁকি</h2>
+                </div>
+                <div class="overflow-x-auto"><table class="table-auto w-full text-left">
+                    <thead><tr><th class="px-4 py-2">Disease | রোগ</th><th class="px-4 py-2">Key Symptoms | লক্ষণ</th></tr></thead>
+                    <tbody>${diseases.map(d => `<tr class="border-b"><td class="px-4 py-2 font-medium">${d.name}</td><td class="px-4 py-2">${d.symptoms}</td></tr>`).join('')}</tbody>
+                </table></div>`;
+        }
+        
+        function displayTreatmentProtocols() {
+            const container = document.getElementById('treatment-protocol');
+            const protocols = [
+                 { name: "Clinical Mastitis | ওলান প্রদাহ", protocol: `<div class="protocol"><h4>Treatment | চিকিৎসা</h4><p><strong>Intramammary:</strong> <strong>Mastinil, Cloxavet-M</strong>. <br><strong>Injectable Antibiotics:</strong> <strong>Renamycin LA</strong> or <strong>Cefti-Vet</strong>. <br><strong>Anti-inflammatory:</strong> <strong>Mel-Vet</strong> or <strong>Keto-A Vet</strong>.</p></div>` },
+                 { name: "Frothy Bloat | পেট ফাঁপা", protocol: `<div class="protocol"><h4>Treatment | চিকিৎসা</h4><p><strong>Anti-bloat Agents:</strong> <strong>Bloat Stop, Bloatosil</strong>. <br><strong>Emergency:</strong> Vet will puncture left flank with trocar.</p></div>` },
+                 { name: "Milk Fever | দুগ্ধ জ্বর", protocol: `<div class="protocol"><h4>Treatment | চিকিৎসা</h4><p><strong>IV Calcium:</strong> Vet will slowly infuse <strong>Cal-D-Mag</strong> or <strong>Caldee-Plus IV</strong>. <br><strong>Prevention:</strong> Oral calcium gel (<strong>Cal-gel</strong>) after calving.</p></div>` },
+                 { name: "Calf Scours | বাছুরের ডায়রিয়া", protocol: `<div class="protocol"><h4>Treatment | চিকিৎসা</h4><p><strong>Fluid Therapy:</strong> Oral rehydration salts (ORS) like <strong>Electrolyte-P Vet, Glucolyte Vet</strong> is critical. <br><strong>Antibiotics:</strong> Only if bacterial, vet may prescribe <strong>Enrocin</strong> or <strong>Baytril</strong>.</p></div>` }
+            ];
+            container.innerHTML = `
+                <div class="card-header">
+                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" /></svg>
+                    <h2>Disease Treatment Protocols | রোগের চিকিৎসা নির্দেশিকা</h2>
+                </div>
+                 <p class="mb-4 text-sm text-red-600 bg-red-100 p-2 rounded-md"><strong>CRITICAL WARNING:</strong> Consult a qualified veterinarian for diagnosis and treatment.</p>
+                <div class="space-y-4">${protocols.map(p => `<div><h3 class="text-lg font-bold text-gray-800">${p.name}</h3>${p.protocol}</div>`).join('')}</div>`;
+        }
+
+        function displayMilkingMedicineList() {
+            const container = document.getElementById('milking-medicine-list');
+            const meds = [
+                { category: "Anthelmintics | কৃমিনাশক", generic: "Ivermectin / Triclabendazole+Albendazole", brand: "Vermic / Triven, Almex" },
+                { category: "Antibiotics | অ্যান্টিবায়োটিক", generic: "Oxytetracycline LA / Ceftiofur", brand: "Renamycin LA, Cefti-Vet" },
+                { category: "Pain & Fever (NSAID) | ব্যথা ও জ্বর", generic: "Meloxicam / Ketoprofen", brand: "Mel-Vet, Keto-A Vet" },
+                { category: "Vitamin-Mineral Supplement | ভিটামিন ও মিনারেল", generic: "Vitamin ADE / B-Complex", brand: "Inject-ADE, B-Plex Vet" },
+                { category: "Mineral Mixture (Oral) | খনিজ লবণ (খাবার)", generic: "Chelated Minerals & Vitamins", brand: "Min-A-Vet, Rumicare Gold" },
+                { category: "Liver Tonic | লিভার টনিক", generic: "Herbal Liver Stimulants, Vit B12", brand: "Liv-a-Vet, Livatone" },
+                { category: "Uterine Tonic (Post-Calving) | জরায়ুর টনিক", generic: "Herbal Uterine Cleanser", brand: "Exapar, U-Clean" },
+                { category: "Digestive/Rumen Health | হজম সহায়ক", generic: "Probiotics, Yeast, Rumen Buffer", brand: "Rumi-Care, Bio-Gut, Soda-bicarb" },
+                { category: "Topical Antiseptic | জীবাণুনাশক (বাহ্যিক)", generic: "Povidone-Iodine / Chlorhexidine", brand: "Povisept, Viodin" }
+            ];
+            container.innerHTML = `
+                <div class="card-header">
+                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
+                    <h2>Essential & Supportive Pharmacy | প্রয়োজনীয় ও সহায়ক ঔষধ</h2>
+                </div>
+                 <p class="mb-4 text-sm text-gray-600"><strong>Important:</strong> Always use medicine under the guidance of a veterinarian.</p>
+                <div class="overflow-x-auto"><table class="table-auto w-full text-left">
+                    <thead><tr><th class="px-4 py-2">Category | প্রকার</th><th class="px-4 py-2">Generic Name / Type</th><th class="px-4 py-2">BD Brand Name</th></tr></thead>
+                    <tbody>${meds.map(m => `<tr class="border-b"><td class="px-4 py-2">${m.category}</td><td class="px-4 py-2">${m.generic}</td><td class="px-4 py-2">${m.brand}</td></tr>`).join('')}</tbody>
+                </table></div>`;
+        }
+    </script>
+</body>
+</html>
+
