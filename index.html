@@ -9,12 +9,12 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f0fdf4; /* A light green background */
+            background-color: #f0fdf4;
         }
         .card {
             background-color: white;
             border-radius: 0.75rem;
-            box-shadow: 0 4px_6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
             padding: 1.5rem;
             margin-bottom: 1.5rem;
             transition: all 0.3s ease-in-out;
@@ -24,7 +24,7 @@
             display: flex;
             align-items: center;
             margin-bottom: 1rem;
-            border-bottom: 2px solid #22c55e; /* Green border */
+            border-bottom: 2px solid #22c55e;
             padding-bottom: 0.75rem;
         }
         .card-header svg {
@@ -36,10 +36,10 @@
         .card-header h2 {
             font-size: 1.5rem;
             font-weight: 700;
-            color: #166534; /* Darker green */
+            color: #166534;
         }
         .table-auto th {
-            background-color: #dcfce7; /* Light green for table headers */
+            background-color: #dcfce7;
         }
         .protocol {
             border-left: 4px solid #86efac;
@@ -484,7 +484,7 @@
                  </div>
                  <div class="card">
                      <div class="card-header">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0Z" /></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
                         <h2>Anthelmintic (Deworming) Guide | কৃমিনাশক নির্দেশিকা</h2>
                      </div>
                      <p class="mb-4 text-sm text-gray-600">Rotate dewormer types annually to prevent resistance. Dose accurately based on body weight.</p>
@@ -539,8 +539,6 @@
         }
 
         function displayHeiferPlan() {
-            const container = document.createElement('div');
-            container.className = 'card';
             const stages = [
                 { stage: "Post-Weaning (3-6 Months)", detail: "Focus on frame growth. Provide high-quality forage and 1-1.5 kg of calf grower concentrate. Ensure access to mineral mixture." },
                 { stage: "Growing (6-15 Months)", detail: "Target weight for breeding is crucial (~250-300 kg for Holstein Friesian Cross). Provide good quality green fodder ad-libitum and 1.5-2 kg concentrate. Monitor growth monthly." },
@@ -558,29 +556,29 @@
                 { name: "Brucellosis (Bang's Disease)", symptoms: "Often no visible signs until she aborts her first calf, usually in the last trimester. Can also cause retained placenta.", treatment: "No effective treatment. Prevention is the only option. Vaccinate female calves between 4-8 months of age with Brucella S19 vaccine." },
                 { name: "Leptospirosis", symptoms: "Fever, jaundice (yellowish gums), red-colored urine ('red water'), abortion storms.", treatment: "High doses of antibiotics like <strong>Streptomycin</strong> or <strong>Oxytetracycline (e.g., Renamycin LA)</strong>. Vaccination is available and recommended for prevention in endemic areas." },
              ];
-             container.innerHTML = `
-                 <div class="card-header">
-                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 21v-7.5a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 .75.75V21m-4.5 0H2.25a.75.75 0 0 1-.75-.75V10.5a.75.75 0 0 1 .75-.75h1.5m16.5 0h1.5a.75.75 0 0 1 .75.75v9.75a.75.75 0 0 1-.75.75h-3.375m-14.25 0c-.092-.23-.15-.473-.15-.72V5.25c0-.621.504-1.125 1.125-1.125h14.25c.621 0 1.125.504 1.125 1.125v4.23c-.029.247-.09.489-.17.714" /></svg>
-                     <h2>Heifer Management (Weaning to First Calving)</h2>
-                 </div>
-                <p class="mb-4 text-gray-700">Properly raising heifers is the foundation of a sustainable dairy farm. The goal is to achieve the target breeding weight at the right age.</p>
-                <h3 class="font-semibold text-lg text-gray-800 mb-2">Management by Stage</h3>
-                <div class="overflow-x-auto mb-6"><table class="table-auto w-full text-left">
-                    <thead><tr><th class="px-4 py-2">Stage | পর্যায়</th><th class="px-4 py-2">Management & Feeding | ব্যবস্থাপনা ও খাদ্য</th></tr></thead>
-                    <tbody>${stages.map(s => `<tr class="border-b"><td class="px-4 py-2 font-medium">${s.stage}</td><td class="px-4 py-2">${s.detail}</td></tr>`).join('')}</tbody>
-                </table></div>
-                <h3 class="font-semibold text-lg text-gray-800 mb-2">Anthelmintic (Deworming) Procedure | কৃমিনাশক পদ্ধতি</h3>
-                <div class="overflow-x-auto mb-6"><table class="table-auto w-full text-left">
-                    <thead><tr><th class="px-4 py-2">Age Group</th><th class="px-4 py-2">Recommended Drug</th><th class="px-4 py-2">BD Brand Name</th><th class="px-4 py-2">Notes</th></tr></thead>
-                     <tbody>${deworming.map(d => `<tr class="border-b"><td class="px-4 py-2 font-medium">${d.age}</td><td class="px-4 py-2">${d.drug}</td><td class="px-4 py-2">${d.brand}</td><td class="px-4 py-2">${d.notes}</td></tr>`).join('')}</tbody>
-                </table></div>
-                <h3 class="font-semibold text-lg text-gray-800 mb-2">Common Disease Threats in Heifers</h3>
-                 <div class="overflow-x-auto"><table class="table-auto w-full text-left">
-                    <thead><tr><th class="px-4 py-2">Disease</th><th class="px-4 py-2">Key Symptoms</th><th class="px-4 py-2">Prevention & Treatment</th></tr></thead>
-                     <tbody>${diseases.map(d => `<tr class="border-b"><td class="px-4 py-2 font-medium">${d.name}</td><td class="px-4 py-2">${d.symptoms}</td><td class="px-4 py-2">${d.treatment}</td></tr>`).join('')}</tbody>
-                </table></div>
-            `;
-            return container.innerHTML;
+             return `
+                 <div class="card">
+                     <div class="card-header">
+                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 21v-7.5a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 .75.75V21m-4.5 0H2.25a.75.75 0 0 1-.75-.75V10.5a.75.75 0 0 1 .75-.75h1.5m16.5 0h1.5a.75.75 0 0 1 .75.75v9.75a.75.75 0 0 1-.75.75h-3.375m-14.25 0c-.092-.23-.15-.473-.15-.72V5.25c0-.621.504-1.125 1.125-1.125h14.25c.621 0 1.125.504 1.125 1.125v4.23c-.029.247-.09.489-.17.714" /></svg>
+                         <h2>Heifer Management (Weaning to First Calving)</h2>
+                     </div>
+                    <p class="mb-4 text-gray-700">Properly raising heifers is the foundation of a sustainable dairy farm. The goal is to achieve the target breeding weight at the right age.</p>
+                    <h3 class="font-semibold text-lg text-gray-800 mb-2">Management by Stage</h3>
+                    <div class="overflow-x-auto mb-6"><table class="table-auto w-full text-left">
+                        <thead><tr><th class="px-4 py-2">Stage | পর্যায়</th><th class="px-4 py-2">Management & Feeding | ব্যবস্থাপনা ও খাদ্য</th></tr></thead>
+                        <tbody>${stages.map(s => `<tr class="border-b"><td class="px-4 py-2 font-medium">${s.stage}</td><td class="px-4 py-2">${s.detail}</td></tr>`).join('')}</tbody>
+                    </table></div>
+                    <h3 class="font-semibold text-lg text-gray-800 mb-2">Anthelmintic (Deworming) Procedure | কৃমিনাশক পদ্ধতি</h3>
+                    <div class="overflow-x-auto mb-6"><table class="table-auto w-full text-left">
+                        <thead><tr><th class="px-4 py-2">Age Group</th><th class="px-4 py-2">Recommended Drug</th><th class="px-4 py-2">BD Brand Name</th><th class="px-4 py-2">Notes</th></tr></thead>
+                         <tbody>${deworming.map(d => `<tr class="border-b"><td class="px-4 py-2 font-medium">${d.age}</td><td class="px-4 py-2">${d.drug}</td><td class="px-4 py-2">${d.brand}</td><td class="px-4 py-2">${d.notes}</td></tr>`).join('')}</tbody>
+                    </table></div>
+                    <h3 class="font-semibold text-lg text-gray-800 mb-2">Common Disease Threats in Heifers</h3>
+                     <div class="overflow-x-auto"><table class="table-auto w-full text-left">
+                        <thead><tr><th class="px-4 py-2">Disease</th><th class="px-4 py-2">Key Symptoms</th><th class="px-4 py-2">Prevention & Treatment</th></tr></thead>
+                         <tbody>${diseases.map(d => `<tr class="border-b"><td class="px-4 py-2 font-medium">${d.name}</td><td class="px-4 py-2">${d.symptoms}</td><td class="px-4 py-2">${d.treatment}</td></tr>`).join('')}</tbody>
+                    </table></div>
+                </div>`;
         }
 
 
@@ -697,7 +695,7 @@
                 { category: "Liver Tonic | লিভার টনিক", generic: "B-Complex + Choline Chloride", brand: "Livatone, Bio-Liv" },
                 { category: "Appetite Stimulant | রুচিবর্ধক", generic: "Vitamin B-Complex Injection", brand: "B-Plex Vet, Rumen-FS" },
                 { category: "Anti-bloat Agent | পেট ফাঁপা রোধক", generic: "Simethicone Emulsion", brand: "Bloat Stop, Bloatosil" },
-                { category: "Pain & Fever (NSAID) | ব্যথা ও জ্বর", generic: "Meloxicam / Ketoprofen", brand: "Mel-Vet, Keto-A Vet" },
+                { category: "Pain & Fever (NSAID) | ব্যথা ও জ্বর", generic: "Meloxicam / Flunixin Meglumine", brand: "Mel-Vet, Finadyne" },
                 { category: "Topical Antiseptic | জীবাণুনাশক (বাহ্যিক)", generic: "Povidone-Iodine / Negasunt Powder", brand: "Povisept, D-mag" }
             ];
             return `
@@ -749,26 +747,28 @@
                 { generic: "Albendazole / Triclabendazole", brand: "Almex / Triven", dose: "10-15 mg per kg body weight (Oral Bolus)", safety: "<strong class='text-red-600'>AVOID</strong> during the first 45 days (first trimester) of pregnancy. Can be used in mid to late pregnancy under vet supervision." }
             ];
             return `
-                <div class="card-header">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345h5.364c.518 0 .734.654.372 1.014l-4.341 3.16a.563.563 0 0 0-.182.643l2.125 5.111a.563.563 0 0 1-.84.622l-4.34-3.16a.563.563 0 0 0-.676 0l-4.34 3.16a.563.563 0 0 1-.84-.622l2.125-5.111a.563.563 0 0 0-.182-.643l-4.341-3.16a.563.563 0 0 1 .372-1.014h5.364a.563.563 0 0 0 .475-.345L11.48 3.5Z" /></svg>
-                    <h2>Pregnant Animal Management | গর্ভবতী পশুর ব্যবস্থাপনা</h2>
-                </div>
-                <h3 class="font-semibold text-lg text-gray-800 mb-2 mt-4">Management by Stage | পর্যায় ভিত্তিক ব্যবস্থাপনা</h3>
-                <div class="overflow-x-auto mb-4"><table class="table-auto w-full text-left">
-                    <thead><tr><th class="px-4 py-2">Stage | পর্যায়</th><th class="px-4 py-2">Management Tasks | করণীয়</th></tr></thead>
-                    <tbody>${care.map(item => `<tr class="border-b"><td class="px-4 py-2 font-medium">${item.stage}</td><td class="px-4 py-2">${item.tasks}</td></tr>`).join('')}</tbody>
-                </table></div>
-                <h3 class="font-semibold text-lg text-gray-800 mb-2 mt-4">Health & Medicine Schedule | স্বাস্থ্য ও ঔষধ প্রয়োগ</h3>
-                <div class="overflow-x-auto mb-4"><table class="table-auto w-full text-left">
-                    <thead><tr><th class="px-4 py-2">Time | সময়</th><th class="px-4 py-2">Action | করণীয়</th></tr></thead>
-                    <tbody>${health.map(item => `<tr class="border-b"><td class="px-4 py-2 font-medium">${item.time}</td><td class="px-4 py-2">${item.action}</td></tr>`).join('')}</tbody>
-                </table></div>
-                <h3 class="font-semibold text-lg text-gray-800 mb-2 mt-4">Anthelmintic (Deworming) Guide | কৃমিনাশক নির্দেশিকা</h3>
-                <div class="overflow-x-auto"><table class="table-auto w-full text-left">
-                    <thead><tr><th class="px-4 py-2">Generic Name</th><th class="px-4 py-2">BD Brand Name</th><th class="px-4 py-2">Dose</th><th class="px-4 py-2">Pregnancy Safety</th></tr></thead>
-                    <tbody>${deworming.map(d => `<tr class="border-b"><td class="px-4 py-2 font-medium">${d.generic}</td><td class="px-4 py-2">${d.brand}</td><td class="px-4 py-2">${d.dose}</td><td class="px-4 py-2">${d.safety}</td></tr>`).join('')}</tbody>
-                </table></div>
-                <p class="mt-2 text-sm text-gray-600"><strong>Note:</strong> Always calculate dose accurately based on the cow's current body weight. Consult a veterinarian before administering any medicine.</p>`;
+                <div class="card">
+                    <div class="card-header">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345h5.364c.518 0 .734.654.372 1.014l-4.341 3.16a.563.563 0 0 0-.182.643l2.125 5.111a.563.563 0 0 1-.84.622l-4.34-3.16a.563.563 0 0 0-.676 0l-4.34 3.16a.563.563 0 0 1-.84-.622l2.125-5.111a.563.563 0 0 0-.182-.643l-4.341-3.16a.563.563 0 0 1 .372-1.014h5.364a.563.563 0 0 0 .475-.345L11.48 3.5Z" /></svg>
+                        <h2>Pregnant Animal Management | গর্ভবতী পশুর ব্যবস্থাপনা</h2>
+                    </div>
+                    <h3 class="font-semibold text-lg text-gray-800 mb-2 mt-4">Management by Stage | পর্যায় ভিত্তিক ব্যবস্থাপনা</h3>
+                    <div class="overflow-x-auto mb-4"><table class="table-auto w-full text-left">
+                        <thead><tr><th class="px-4 py-2">Stage | পর্যায়</th><th class="px-4 py-2">Management Tasks | করণীয়</th></tr></thead>
+                        <tbody>${care.map(item => `<tr class="border-b"><td class="px-4 py-2 font-medium">${item.stage}</td><td class="px-4 py-2">${item.tasks}</td></tr>`).join('')}</tbody>
+                    </table></div>
+                    <h3 class="font-semibold text-lg text-gray-800 mb-2 mt-4">Health & Medicine Schedule | স্বাস্থ্য ও ঔষধ প্রয়োগ</h3>
+                    <div class="overflow-x-auto mb-4"><table class="table-auto w-full text-left">
+                        <thead><tr><th class="px-4 py-2">Time | সময়</th><th class="px-4 py-2">Action | করণীয়</th></tr></thead>
+                        <tbody>${health.map(item => `<tr class="border-b"><td class="px-4 py-2 font-medium">${item.time}</td><td class="px-4 py-2">${item.action}</td></tr>`).join('')}</tbody>
+                    </table></div>
+                    <h3 class="font-semibold text-lg text-gray-800 mb-2 mt-4">Anthelmintic (Deworming) Guide | কৃমিনাশক নির্দেশিকা</h3>
+                    <div class="overflow-x-auto"><table class="table-auto w-full text-left">
+                        <thead><tr><th class="px-4 py-2">Generic Name</th><th class="px-4 py-2">BD Brand Name</th><th class="px-4 py-2">Dose</th><th class="px-4 py-2">Pregnancy Safety</th></tr></thead>
+                        <tbody>${deworming.map(d => `<tr class="border-b"><td class="px-4 py-2 font-medium">${d.generic}</td><td class="px-4 py-2">${d.brand}</td><td class="px-4 py-2">${d.dose}</td><td class="px-4 py-2">${d.safety}</td></tr>`).join('')}</tbody>
+                    </table></div>
+                    <p class="mt-2 text-sm text-gray-600"><strong>Note:</strong> Always calculate dose accurately based on the cow's current body weight. Consult a veterinarian before administering any medicine.</p>
+                </div>`;
         }
         
         function displayDryCowPlan() {
@@ -789,29 +789,31 @@
                 { step: "4", action: "After infusion, dip the teats in an antiseptic teat dip solution. If available, an external teat sealant can be applied." }
             ];
             return `
-                <div class="card-header">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" /></svg>
-                    <h2>Dry Cow Management | দুগ্ধহীন গাভীর ব্যবস্থাপনা</h2>
-                </div>
-                <p class="mb-4 text-gray-700">The dry period (typically 60 days before calving) is a vital resting phase that determines the health and productivity of the next lactation cycle.</p>
-                <h3 class="font-semibold text-lg text-gray-800 mb-2">Primary Goals of the Dry Period | মূল উদ্দেশ্য</h3>
-                <ul class="list-disc list-inside space-y-1 mb-4">${goals.map(g => `<li>${g}</li>`).join('')}</ul>
-                <h3 class="font-semibold text-lg text-gray-800 mb-2">Drying Off Procedure | দুধ শুকানোর পদ্ধতি</h3>
-                <div class="overflow-x-auto mb-4"><table class="table-auto w-full text-left">
-                    <thead><tr><th class="px-4 py-2">Step | ধাপ</th><th class="px-4 py-2">Action | করণীয়</th></tr></thead>
-                    <tbody>${dryingOff.map(d => `<tr class="border-b"><td class="px-4 py-2 font-medium">${d.step}</td><td class="px-4 py-2">${d.action}</td></tr>`).join('')}</tbody>
-                </table></div>
-                <h3 class="font-semibold text-lg text-gray-800 mb-2 mt-4">Management by Phase | পর্যায় ভিত্তিক ব্যবস্থাপনা</h3>
-                <div class="overflow-x-auto"><table class="table-auto w-full text-left">
-                    <thead><tr><th class="px-4 py-2">Phase | পর্যায়</th><th class="px-4 py-2">Feeding Strategy | খাদ্য ব্যবস্থাপনা</th><th class="px-4 py-2">Management | সাধারণ ব্যবস্থাপনা</th></tr></thead>
-                    <tbody>${phases.map(p => `<tr class="border-b"><td class="px-4 py-2 font-medium">${p.phase}</td><td class="px-4 py-2">${p.feeding}</td><td class="px-4 py-2">${p.management}</td></tr>`).join('')}</tbody>
-                </table></div>`;
+                <div class="card">
+                    <div class="card-header">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" /></svg>
+                        <h2>Dry Cow Management | দুগ্ধহীন গাভীর ব্যবস্থাপনা</h2>
+                    </div>
+                    <p class="mb-4 text-gray-700">The dry period (typically 60 days before calving) is a vital resting phase that determines the health and productivity of the next lactation cycle.</p>
+                    <h3 class="font-semibold text-lg text-gray-800 mb-2">Primary Goals of the Dry Period | মূল উদ্দেশ্য</h3>
+                    <ul class="list-disc list-inside space-y-1 mb-4">${goals.map(g => `<li>${g}</li>`).join('')}</ul>
+                    <h3 class="font-semibold text-lg text-gray-800 mb-2">Drying Off Procedure | দুধ শুকানোর পদ্ধতি</h3>
+                    <div class="overflow-x-auto mb-4"><table class="table-auto w-full text-left">
+                        <thead><tr><th class="px-4 py-2">Step | ধাপ</th><th class="px-4 py-2">Action | করণীয়</th></tr></thead>
+                        <tbody>${dryingOff.map(d => `<tr class="border-b"><td class="px-4 py-2 font-medium">${d.step}</td><td class="px-4 py-2">${d.action}</td></tr>`).join('')}</tbody>
+                    </table></div>
+                    <h3 class="font-semibold text-lg text-gray-800 mb-2 mt-4">Management by Phase | পর্যায় ভিত্তিক ব্যবস্থাপনা</h3>
+                    <div class="overflow-x-auto"><table class="table-auto w-full text-left">
+                        <thead><tr><th class="px-4 py-2">Phase | পর্যায়</th><th class="px-4 py-2">Feeding Strategy | খাদ্য ব্যবস্থাপনা</th><th class="px-4 py-2">Management | সাধারণ ব্যবস্থাপনা</th></tr></thead>
+                        <tbody>${phases.map(p => `<tr class="border-b"><td class="px-4 py-2 font-medium">${p.phase}</td><td class="px-4 py-2">${p.feeding}</td><td class="px-4 py-2">${p.management}</td></tr>`).join('')}</tbody>
+                    </table></div>
+                </div>`;
         }
 
         function displayCalfPlan() {
             const initialCare = [
                 { step: "Step 1 | ধাপ ১", action: "<strong>Birth:</strong> Clear mouth/nose of mucus. If not breathing, rub chest & tickle nostril." },
-                { step: "Step 2 | ধাপ ২", action: "<strong>Navel Dipping | নাভি জীবানুমুক্তকরণ:</strong> Dip umbilical cord in 7% Tincture of Iodine (e.g., <strong>Povisept</strong>) immediately and for 2 more days." },
+                { step: "Step 2 | ধাপ ২", action: "<strong>Navel Dipping | নাভি জীবাণুমুক্তকরণ:</strong> Dip umbilical cord in 7% Tincture of Iodine (e.g., <strong>Povisept</strong>) immediately and for 2 more days." },
                 { step: "Step 3 | ধাপ ৩", action: "<strong>Colostrum Feeding | শালদুধ খাওয়ানো:</strong> Crucial! Feed 10% of body weight within 1-2 hours of birth. (30kg calf needs 3 Liters)." }
             ];
             const feedingSchedule = [
@@ -825,30 +827,30 @@
                 { age: "4 months", action: "First FMD vaccination. Follow with HS, BQ as per main schedule." }
             ];
             return `
-                <div class="card-header">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12.156-6.75 20.25m11.13-9.598a3.75 3.75 0 1 0-5.303 5.304L3 20.25m9.12-9.6a3.75 3.75 0 1 0-5.303 5.304L3 20.25" /><path stroke-linecap="round" stroke-linejoin="round" d="M17.66 3.078a3.75 3.75 0 0 0-5.303 0l-1.12 1.121a3.75 3.75 0 0 0 5.304 5.304l1.12-1.12a3.75 3.75 0 0 0 0-5.304Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12.12 9.18a3.75 3.75 0 1 0-5.303 5.304L3 20.25" /></svg>
-                    <h2>Calf Management (Birth to Weaning) | বাছুর ব্যবস্থাপনা</h2>
-                </div>
-                <h3 class="font-semibold text-lg text-gray-800 mb-2">Initial Care | প্রাথমিক যত্ন</h3>
-                <div class="overflow-x-auto mb-4"><table class="table-auto w-full text-left">
-                    <thead><tr><th class="px-4 py-2">Step | ধাপ</th><th class="px-4 py-2">Action | করণীয়</th></tr></thead>
-                    <tbody>${initialCare.map(item => `<tr class="border-b"><td class="px-4 py-2 font-medium">${item.step}</td><td class="px-4 py-2">${item.action}</td></tr>`).join('')}</tbody>
-                </table></div>
-                <h3 class="font-semibold text-lg text-gray-800 mb-2">Feeding Schedule | খাবার তালিকা</h3>
-                <div class="overflow-x-auto mb-4"><table class="table-auto w-full text-left">
-                    <thead><tr><th class="px-4 py-2">Age | বয়স</th><th class="px-4 py-2">Feed Details | খাবার</th></tr></thead>
-                    <tbody>${feedingSchedule.map(item => `<tr class="border-b"><td class="px-4 py-2 font-medium">${item.age}</td><td class="px-4 py-2">${item.feed}</td></tr>`).join('')}</tbody>
-                </table></div>
-                <h3 class="font-semibold text-lg text-gray-800 mb-2">Health Schedule | স্বাস্থ্য সুরক্ষা</h3>
-                <div class="overflow-x-auto"><table class="table-auto w-full text-left">
-                    <thead><tr><th class="px-4 py-2">Age | বয়স</th><th class="px-4 py-2">Action | করণীয়</th></tr></thead>
-                    <tbody>${healthSchedule.map(item => `<tr class="border-b"><td class="px-4 py-2 font-medium">${item.age}</td><td class="px-4 py-2">${item.action}</td></tr>`).join('')}</tbody>
-                </table></div>`;
+                <div class="card">
+                    <div class="card-header">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12.156-6.75 20.25m11.13-9.598a3.75 3.75 0 1 0-5.303 5.304L3 20.25m9.12-9.6a3.75 3.75 0 1 0-5.303 5.304L3 20.25" /><path stroke-linecap="round" stroke-linejoin="round" d="M17.66 3.078a3.75 3.75 0 0 0-5.303 0l-1.12 1.121a3.75 3.75 0 0 0 5.304 5.304l1.12-1.12a3.75 3.75 0 0 0 0-5.304Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12.12 9.18a3.75 3.75 0 1 0-5.303 5.304L3 20.25" /></svg>
+                        <h2>Calf Management (Birth to Weaning) | বাছুর ব্যবস্থাপনা</h2>
+                    </div>
+                    <h3 class="font-semibold text-lg text-gray-800 mb-2">Initial Care | প্রাথমিক যত্ন</h3>
+                    <div class="overflow-x-auto mb-4"><table class="table-auto w-full text-left">
+                        <thead><tr><th class="px-4 py-2">Step | ধাপ</th><th class="px-4 py-2">Action | করণীয়</th></tr></thead>
+                        <tbody>${initialCare.map(item => `<tr class="border-b"><td class="px-4 py-2 font-medium">${item.step}</td><td class="px-4 py-2">${item.action}</td></tr>`).join('')}</tbody>
+                    </table></div>
+                    <h3 class="font-semibold text-lg text-gray-800 mb-2">Feeding Schedule | খাবার তালিকা</h3>
+                    <div class="overflow-x-auto mb-4"><table class="table-auto w-full text-left">
+                        <thead><tr><th class="px-4 py-2">Age | বয়স</th><th class="px-4 py-2">Feed Details | খাবার</th></tr></thead>
+                        <tbody>${feedingSchedule.map(item => `<tr class="border-b"><td class="px-4 py-2 font-medium">${item.age}</td><td class="px-4 py-2">${item.feed}</td></tr>`).join('')}</tbody>
+                    </table></div>
+                    <h3 class="font-semibold text-lg text-gray-800 mb-2">Health Schedule | স্বাস্থ্য সুরক্ষা</h3>
+                    <div class="overflow-x-auto"><table class="table-auto w-full text-left">
+                        <thead><tr><th class="px-4 py-2">Age | বয়স</th><th class="px-4 py-2">Action | করণীয়</th></tr></thead>
+                        <tbody>${healthSchedule.map(item => `<tr class="border-b"><td class="px-4 py-2 font-medium">${item.age}</td><td class="px-4 py-2">${item.action}</td></tr>`).join('')}</tbody>
+                    </table></div>
+                </div>`;
         }
         
         function displayModernPractices() {
-            const bcsContainer = document.createElement('div');
-            bcsContainer.className = 'card';
             const bcsScores = [
                 { score: "1 (Thin) | কঙ্কালসার", description: "Deep cavity around tail head. No fatty tissue felt. Bones are sharp and prominent." },
                 { score: "2 (Slender) | পাতলা", description: "Shallow cavity around tail head. Some tissue felt. Bones are prominent but have some covering." },
@@ -862,45 +864,45 @@
                 { stage: "Mid-Lactation | মাঝামাঝি সময়", target: "2.75 - 3.25" },
                 { stage: "Dry-Off | দুধ শুকানোর সময়", target: "3.0 - 3.5" }
             ];
-            bcsContainer.innerHTML = `
-                <div class="card-header">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" /></svg>
-                    <h2>Body Condition Scoring (BCS) | শারীরিক অবস্থা মূল্যায়ন</h2>
-                </div>
-                <p class="mb-4 text-gray-700">BCS is a visual and tactile method to assess a cow's fat reserves. It is a critical tool for managing nutrition, health, and fertility. Score monthly.</p>
-                <h3 class="font-semibold text-lg text-gray-800 mb-2">BCS Scoring Chart (1-5 Scale)</h3>
-                <div class="overflow-x-auto mb-4"><table class="table-auto w-full text-left">
-                    <thead><tr><th class="px-4 py-2">Score | স্কোর</th><th class="px-4 py-2">Description | বিবরণ</th></tr></thead>
-                    <tbody>${bcsScores.map(s => `<tr class="border-b"><td class="px-4 py-2 font-medium">${s.score}</td><td class="px-4 py-2">${s.description}</td></tr>`).join('')}</tbody>
-                </table></div>
-                <h3 class="font-semibold text-lg text-gray-800 mb-2">Target Scores | লক্ষ্যমাত্রা</h3>
-                <div class="overflow-x-auto"><table class="table-auto w-full text-left">
-                    <thead><tr><th class="px-4 py-2">Lactation Stage | পর্যায়</th><th class="px-4 py-2">Target BCS | আদর্শ স্কোর</th></tr></thead>
-                    <tbody>${bcsTargets.map(t => `<tr class="border-b"><td class="px-4 py-2 font-medium">${t.stage}</td><td class="px-4 py-2">${t.target}</td></tr>`).join('')}</tbody>
-                </table></div>`;
+            const bcsContainer = `
+                <div class="card">
+                    <div class="card-header">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" /></svg>
+                        <h2>Body Condition Scoring (BCS) | শারীরিক অবস্থা মূল্যায়ন</h2>
+                    </div>
+                    <p class="mb-4 text-gray-700">BCS is a visual and tactile method to assess a cow's fat reserves. It is a critical tool for managing nutrition, health, and fertility. Score monthly.</p>
+                    <h3 class="font-semibold text-lg text-gray-800 mb-2">BCS Scoring Chart (1-5 Scale)</h3>
+                    <div class="overflow-x-auto mb-4"><table class="table-auto w-full text-left">
+                        <thead><tr><th class="px-4 py-2">Score | স্কোর</th><th class="px-4 py-2">Description | বিবরণ</th></tr></thead>
+                        <tbody>${bcsScores.map(s => `<tr class="border-b"><td class="px-4 py-2 font-medium">${s.score}</td><td class="px-4 py-2">${s.description}</td></tr>`).join('')}</tbody>
+                    </table></div>
+                    <h3 class="font-semibold text-lg text-gray-800 mb-2">Target Scores | লক্ষ্যমাত্রা</h3>
+                    <div class="overflow-x-auto"><table class="table-auto w-full text-left">
+                        <thead><tr><th class="px-4 py-2">Lactation Stage | পর্যায়</th><th class="px-4 py-2">Target BCS | আদর্শ স্কোর</th></tr></thead>
+                        <tbody>${bcsTargets.map(t => `<tr class="border-b"><td class="px-4 py-2 font-medium">${t.stage}</td><td class="px-4 py-2">${t.target}</td></tr>`).join('')}</tbody>
+                    </table></div>
+                </div>`;
             
-            const hoofCareContainer = document.createElement('div');
-            hoofCareContainer.className = 'card';
-            hoofCareContainer.innerHTML = `
-                <div class="card-header">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12.75 19.5v-.75a7.5 7.5 0 0 0-7.5-7.5H4.5m0-6.75h.75c7.87 0 14.25 6.38 14.25 14.25v.75M6 18.75a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" /></svg>
-                    <h2>Hoof Care & Lameness Prevention | ক্ষুর যত্ন ও খোঁড়া রোগ প্রতিরোধ</h2>
-                </div>
-                <p class="mb-4 text-gray-700">Lameness is a major cause of pain and production loss. Proactive hoof care is essential for a profitable farm.</p>
-                <ul class="list-disc list-inside space-y-2 text-gray-700">
-                    <li><strong>Regular Hoof Trimming:</strong> At least once or twice a year, especially before the dry period.</li>
-                    <li><strong>Footbath Use:</strong> A shallow bath at the entry/exit of the milking parlor or shed helps kill bacteria.
-                        <ul class="list-decimal list-inside ml-6 mt-1">
-                            <li><strong>Solution:</strong> 5% Copper Sulphate (তুঁতে) solution is common. Mix 500g of Copper Sulphate in 10 Liters of water.</li>
-                            <li><strong>Frequency:</strong> Use for 3-4 consecutive days every week.</li>
-                            <li><strong>Important:</strong> Keep the solution clean and ensure the path to the footbath is not slippery.</li>
-                        </ul>
-                    </li>
-                    <li><strong>Housing:</strong> Ensure floors are not slippery, are cleaned regularly, and provide soft bedding areas.</li>
-                </ul>`;
+            const hoofCareContainer = `
+                <div class="card">
+                    <div class="card-header">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12.75 19.5v-.75a7.5 7.5 0 0 0-7.5-7.5H4.5m0-6.75h.75c7.87 0 14.25 6.38 14.25 14.25v.75M6 18.75a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" /></svg>
+                        <h2>Hoof Care & Lameness Prevention | ক্ষুর যত্ন ও খোঁড়া রোগ প্রতিরোধ</h2>
+                    </div>
+                    <p class="mb-4 text-gray-700">Lameness is a major cause of pain and production loss. Proactive hoof care is essential for a profitable farm.</p>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li><strong>Regular Hoof Trimming:</strong> At least once or twice a year, especially before the dry period.</li>
+                        <li><strong>Footbath Use:</strong> A shallow bath at the entry/exit of the milking parlor or shed helps kill bacteria.
+                            <ul class="list-decimal list-inside ml-6 mt-1">
+                                <li><strong>Solution:</strong> 5% Copper Sulphate (তুঁতে) solution is common. Mix 500g of Copper Sulphate in 10 Liters of water.</li>
+                                <li><strong>Frequency:</strong> Use for 3-4 consecutive days every week.</li>
+                                <li><strong>Important:</strong> Keep the solution clean and ensure the path to the footbath is not slippery.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Housing:</strong> Ensure floors are not slippery, are cleaned regularly, and provide soft bedding areas.</li>
+                    </ul>
+                </div>`;
 
-            const biosecurityContainer = document.createElement('div');
-            biosecurityContainer.className = 'card';
             const biosecurityPoints = [
                 { point: "Isolate New Animals | নতুন পশু পৃথক রাখা", detail: "Quarantine all new animals for at least 30 days. Vaccinate and deworm them before mixing with the main herd." },
                 { point: "Control Access | প্রবেশ নিয়ন্ত্রণ", detail: "Limit visitors. Ensure any visitor or vehicle entering the farm uses a disinfectant footbath or tire bath." },
@@ -909,18 +911,20 @@
                 { point: "Separate Sick Animals | অসুস্থ পশু আলাদা করা", detail: "Immediately move sick animals to a separate 'hospital' pen. Use separate equipment for them." },
                 { point: "Manure Management | গোবর ব্যবস্থাপনা", detail: "Clean sheds daily. Store manure away from animal housing and feed stores to reduce flies and disease spread." }
             ];
-            biosecurityContainer.innerHTML = `
-                <div class="card-header">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.286Z" /></svg>
-                    <h2>Farm Biosecurity | খামারের জৈব নিরাপত্তা</h2>
-                </div>
-                <p class="mb-4 text-gray-700">Biosecurity means taking steps to prevent diseases from entering or spreading within your farm. It is one of the most important investments for farm sustainability.</p>
-                <div class="overflow-x-auto"><table class="table-auto w-full text-left">
-                    <thead><tr><th class="px-4 py-2">Practice | অনুশীলন</th><th class="px-4 py-2">Details | বিস্তারিত</th></tr></thead>
-                    <tbody>${biosecurityPoints.map(p => `<tr class="border-b"><td class="px-4 py-2 font-medium">${p.point}</td><td class="px-4 py-2">${p.detail}</td></tr>`).join('')}</tbody>
-                </table></div>`;
+            const biosecurityContainer = `
+                <div class="card">
+                    <div class="card-header">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.286Z" /></svg>
+                        <h2>Farm Biosecurity | খামারের জৈব নিরাপত্তা</h2>
+                    </div>
+                    <p class="mb-4 text-gray-700">Biosecurity means taking steps to prevent diseases from entering or spreading within your farm. It is one of the most important investments for farm sustainability.</p>
+                    <div class="overflow-x-auto"><table class="table-auto w-full text-left">
+                        <thead><tr><th class="px-4 py-2">Practice | অনুশীলন</th><th class="px-4 py-2">Details | বিস্তারিত</th></tr></thead>
+                        <tbody>${biosecurityPoints.map(p => `<tr class="border-b"><td class="px-4 py-2 font-medium">${p.point}</td><td class="px-4 py-2">${p.detail}</td></tr>`).join('')}</tbody>
+                    </table></div>
+                </div>`;
 
-            return bcsContainer.outerHTML + hoofCareContainer.outerHTML + biosecurityContainer.outerHTML;
+            return bcsContainer + hoofCareContainer + biosecurityContainer;
         }
 
         function displayVaccinationSchedule(startDate) {
@@ -932,49 +936,78 @@
                 { name: "BQ | বাদলা রোগ", schedule: `Around ${addDays(startDate, 60)}. Annually before monsoon.`, notes: "For young cattle." }
             ];
             return `
-                <div class="card-header">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 0 0-3.7-3.7 48.678 48.678 0 0 0-7.324 0 4.006 4.006 0 0 0-3.7 3.7c-.092 1.21-.138 2.43-.138 3.662a4.006 4.006 0 0 0 3.7 3.7 48.656 48.656 0 0 0 7.324 0 4.006 4.006 0 0 0 3.7-3.7Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /></svg>
-                    <h2>Adult Vaccination Schedule | টিকার সময়সূচী</h2>
-                </div>
-                <div class="overflow-x-auto"><table class="table-auto w-full text-left">
-                    <thead><tr><th class="px-4 py-2">Vaccine | টিকা</th><th class="px-4 py-2">Schedule | সময়সূচী</th><th class="px-4 py-2">Notes | মন্তব্য</th></tr></thead>
-                    <tbody>${vaccines.map(v => `<tr class="border-b"><td class="px-4 py-2 font-medium">${v.name}</td><td class="px-4 py-2">${v.schedule}</td><td class="px-4 py-2">${v.notes}</td></tr>`).join('')}</tbody>
-                </table></div>`;
+                <div class="card">
+                    <div class="card-header">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 0 0-3.7-3.7 48.678 48.678 0 0 0-7.324 0 4.006 4.006 0 0 0-3.7 3.7c-.092 1.21-.138 2.43-.138 3.662a4.006 4.006 0 0 0 3.7 3.7 48.656 48.656 0 0 0 7.324 0 4.006 4.006 0 0 0 3.7-3.7Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /></svg>
+                        <h2>Adult Vaccination Schedule | টিকার সময়সূচী</h2>
+                    </div>
+                    <div class="overflow-x-auto"><table class="table-auto w-full text-left">
+                        <thead><tr><th class="px-4 py-2">Vaccine | টিকা</th><th class="px-4 py-2">Schedule | সময়সূচী</th><th class="px-4 py-2">Notes | মন্তব্য</th></tr></thead>
+                        <tbody>${vaccines.map(v => `<tr class="border-b"><td class="px-4 py-2 font-medium">${v.name}</td><td class="px-4 py-2">${v.schedule}</td><td class="px-4 py-2">${v.notes}</td></tr>`).join('')}</tbody>
+                    </table></div>
+                </div>`;
         }
 
         function displayFeedRequirement(weight, milk, count) {
-            const totalConcentrate = (milk * 0.4) + 1.0;
+            // CORRECTED LOGIC:
+            // 1 kg concentrate per 100 kg body weight for maintenance
+            // + 1 kg concentrate for every 3 liters of milk production
+            const maintenanceConcentrate = weight / 100; // 1 kg per 100 kg body weight
+            const milkConcentrate = milk / 3; // 1 kg per 3 liters of milk
+            const totalConcentrate = maintenanceConcentrate + milkConcentrate;
+            
             const greenFodderFresh = weight * 0.05;
             const strawFresh = weight * 0.01;
             const mineralMixture = 50;
+            
             const feed = [
                 { item: "Concentrate Feed | দানাদার", perCow: `${totalConcentrate.toFixed(2)} kg`, total: `${(totalConcentrate * count).toFixed(2)} kg` },
                 { item: "Green Fodder | কাঁচা ঘাস", perCow: `${greenFodderFresh.toFixed(2)} kg`, total: `${(greenFodderFresh * count).toFixed(2)} kg` },
                 { item: "Dry Straw | খড়", perCow: `${strawFresh.toFixed(2)} kg`, total: `${(strawFresh * count).toFixed(2)} kg` },
                 { item: "Mineral Mixture | খনিজ লবণ", perCow: `${mineralMixture} gm`, total: `${(mineralMixture * count) / 1000} kg` }
             ];
-            return `
-                <div class="card-header">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" /></svg>
-                    <h2>Daily Feed Requirement | দৈনিক খাদ্য চাহিদা</h2>
+            
+            // Add explanation of the calculation
+            const calculationExplanation = `
+                <div class="mt-4 p-4 bg-blue-50 rounded-md">
+                    <h3 class="font-semibold text-lg text-blue-800 mb-2">Feed Calculation Formula | খাদ্য গণনার সূত্র</h3>
+                    <p class="text-blue-700 mb-2">The concentrate feed requirement is calculated as follows:</p>
+                    <ul class="list-disc list-inside text-blue-700">
+                        <li><strong>Maintenance:</strong> ${maintenanceConcentrate.toFixed(2)} kg (1 kg per 100 kg body weight)</li>
+                        <li><strong>Milk Production:</strong> ${milkConcentrate.toFixed(2)} kg (1 kg per 3 liters of milk)</li>
+                        <li><strong>Total Concentrate:</strong> ${totalConcentrate.toFixed(2)} kg per cow</li>
+                    </ul>
+                    <p class="text-blue-700 mt-2">This formula ensures proper nutrition for both maintenance and milk production needs.</p>
                 </div>
-                <div class="overflow-x-auto"><table class="table-auto w-full text-left">
-                    <thead><tr><th class="px-4 py-2">Feed | খাদ্য</th><th class="px-4 py-2">Per Cow | প্রতি গরু</th><th class="px-4 py-2">Total for ${count} Cow(s)</th></tr></thead>
-                    <tbody>${feed.map(f => `<tr class="border-b"><td class="px-4 py-2 font-medium">${f.item}</td><td class="px-4 py-2">${f.perCow}</td><td class="px-4 py-2">${f.total}</td></tr>`).join('')}</tbody>
-                </table></div>`;
+            `;
+            
+            return `
+                <div class="card">
+                    <div class="card-header">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" /></svg>
+                        <h2>Daily Feed Requirement | দৈনিক খাদ্য চাহিদা</h2>
+                    </div>
+                    <div class="overflow-x-auto"><table class="table-auto w-full text-left">
+                        <thead><tr><th class="px-4 py-2">Feed | খাদ্য</th><th class="px-4 py-2">Per Cow | প্রতি গরু</th><th class="px-4 py-2">Total for ${count} Cow(s)</th></tr></thead>
+                        <tbody>${feed.map(f => `<tr class="border-b"><td class="px-4 py-2 font-medium">${f.item}</td><td class="px-4 py-2">${f.perCow}</td><td class="px-4 py-2">${f.total}</td></tr>`).join('')}</tbody>
+                    </table></div>
+                    ${calculationExplanation}
+                </div>`;
         }
 
         function displayHousingRequirement(count) {
             const coveredArea = 50, openArea = 100;
             return `
-                <div class="card-header">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h7.5" /></svg>
-                    <h2>Total Housing Requirements | মোট বাসস্থান প্রয়োজন</h2>
-                </div>
-                <ul class="list-disc list-inside space-y-2 text-gray-700">
-                    <li><strong>Total Covered Area | মোট ছাউনি:</strong> <strong>${(coveredArea * count).toLocaleString()}</strong> sq. ft.</li>
-                    <li><strong>Total Open Paddock | মোট খোলা জায়গা:</strong> <strong>${(openArea * count).toLocaleString()}</strong> sq. ft.</li>
-                </ul>`;
+                <div class="card">
+                    <div class="card-header">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h7.5" /></svg>
+                        <h2>Total Housing Requirements | মোট বাসস্থান প্রয়োজন</h2>
+                    </div>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li><strong>Total Covered Area | মোট ছাউনি:</strong> <strong>${(coveredArea * count).toLocaleString()}</strong> sq. ft.</li>
+                        <li><strong>Total Open Paddock | মোট খোলা জায়গা:</strong> <strong>${(openArea * count).toLocaleString()}</strong> sq. ft.</li>
+                    </ul>
+                </div>`;
         }
 
         function displayDiseaseThreats() {
@@ -984,37 +1017,41 @@
                 { name: "Milk Fever | দুগ্ধ জ্বর", symptoms: "After calving; weakness, inability to stand, cold ears." }
             ];
             return `
-                <div class="card-header">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
-                    <h2>Common Disease Threats | সাধারণ রোগের ঝুঁকি</h2>
-                </div>
-                <div class="overflow-x-auto"><table class="table-auto w-full text-left">
-                    <thead><tr><th class="px-4 py-2">Disease | রোগ</th><th class="px-4 py-2">Key Symptoms | লক্ষণ</th></tr></thead>
-                    <tbody>${diseases.map(d => `<tr class="border-b"><td class="px-4 py-2 font-medium">${d.name}</td><td class="px-4 py-2">${d.symptoms}</td></tr>`).join('')}</tbody>
-                </table></div>`;
+                <div class="card">
+                    <div class="card-header">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
+                        <h2>Common Disease Threats | সাধারণ রোগের ঝুঁকি</h2>
+                    </div>
+                    <div class="overflow-x-auto"><table class="table-auto w-full text-left">
+                        <thead><tr><th class="px-4 py-2">Disease | রোগ</th><th class="px-4 py-2">Key Symptoms | লক্ষণ</th></tr></thead>
+                        <tbody>${diseases.map(d => `<tr class="border-b"><td class="px-4 py-2 font-medium">${d.name}</td><td class="px-4 py-2">${d.symptoms}</td></tr>`).join('')}</tbody>
+                    </table></div>
+                </div>`;
         }
         
         function displayTreatmentProtocols() {
             const protocols = [
-                { name: "Clinical Mastitis | ওলান প্রদাহ", protocol: `<div class="protocol"><h4>Treatment | চিকিৎসা</h4><p><strong>Intramammary:</strong> <strong>Mastinil, Cloxavet-M</strong>. <br><strong>Injectable Antibiotics:</strong> <strong>Renamycin LA</strong> or <strong>Cefti-Vet</strong>. <br><strong>Anti-inflammatory:</strong> <strong>Mel-Vet</strong> or <strong>Keto-A Vet</strong>.</p></div>` },
+                { name: "Clinical Mastitis | ওলান প্রদাহ", protocol: `<div class="protocol"><h4>Treatment | চিকিৎসা</h4><p><strong>Intramammary:</strong> <strong>Mastinil, Cloxavet-M</strong>. <br><strong>Injectable Antibiotics:</strong> <strong>Renamycin LA</strong> or <strong>Cefti-Vet</strong>. <br><strong>Anti-inflammatory:</strong> <strong>Mel-Vet</strong> or <strong>Flunixin Meglumine</strong>.</p></div>` },
                 { name: "Frothy Bloat | পেট ফাঁপা", protocol: `<div class="protocol"><h4>Treatment | চিকিৎসা</h4><p><strong>Anti-bloat Agents:</strong> <strong>Bloat Stop, Bloatosil</strong>. <br><strong>Emergency:</strong> Vet will puncture left flank with trocar.</p></div>` },
                 { name: "Milk Fever | দুগ্ধ জ্বর", protocol: `<div class="protocol"><h4>Treatment | চিকিৎসা</h4><p><strong>IV Calcium:</strong> Vet will slowly infuse <strong>Cal-D-Mag</strong> or <strong>Caldee-Plus IV</strong>. <br><strong>Prevention:</strong> Oral calcium gel (<strong>Cal-gel</strong>) after calving.</p></div>` },
                 { name: "Calf Scours | বাছুরের ডায়রিয়া", protocol: `<div class="protocol"><h4>Treatment | চিকিৎসা</h4><p><strong>Fluid Therapy:</strong> Oral rehydration salts (ORS) like <strong>Electrolyte-P Vet, Glucolyte Vet</strong> is critical. <br><strong>Antibiotics:</strong> Only if bacterial, vet may prescribe <strong>Enrocin</strong> or <strong>Baytril</strong>.</p></div>` }
             ];
             return `
-                <div class="card-header">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" /></svg>
-                    <h2>Disease Treatment Protocols | রোগের চিকিৎসা নির্দেশিকা</h2>
-                </div>
-                <p class="mb-4 text-sm text-red-600 bg-red-100 p-2 rounded-md"><strong>CRITICAL WARNING:</strong> Consult a qualified veterinarian for diagnosis and treatment.</p>
-                <div class="space-y-4">${protocols.map(p => `<div><h3 class="text-lg font-bold text-gray-800">${p.name}</h3>${p.protocol}</div>`).join('')}</div>`;
+                <div class="card">
+                    <div class="card-header">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" /></svg>
+                        <h2>Disease Treatment Protocols | রোগের চিকিৎসা নির্দেশিকা</h2>
+                    </div>
+                    <p class="mb-4 text-sm text-red-600 bg-red-100 p-2 rounded-md"><strong>CRITICAL WARNING:</strong> Consult a qualified veterinarian for diagnosis and treatment.</p>
+                    <div class="space-y-4">${protocols.map(p => `<div><h3 class="text-lg font-bold text-gray-800">${p.name}</h3>${p.protocol}</div>`).join('')}</div>
+                </div>`;
         }
 
         function displayMilkingMedicineList() {
             const meds = [
                 { category: "Anthelmintics | কৃমিনাশক", generic: "Ivermectin / Triclabendazole+Albendazole", brand: "Vermic / Triven, Almex" },
                 { category: "Antibiotics | অ্যান্টিবায়োটিক", generic: "Oxytetracycline LA / Ceftiofur", brand: "Renamycin LA, Cefti-Vet" },
-                { category: "Pain & Fever (NSAID) | ব্যথা ও জ্বর", generic: "Meloxicam / Ketoprofen", brand: "Mel-Vet, Keto-A Vet" },
+                { category: "Pain & Fever (NSAID) | ব্যথা ও জ্বর", generic: "Meloxicam / Flunixin Meglumine", brand: "Mel-Vet, Finadyne" },
                 { category: "Vitamin-Mineral Supplement | ভিটামিন ও মিনারেল", generic: "Vitamin ADE / B-Complex", brand: "Inject-ADE, B-Plex Vet" },
                 { category: "Mineral Mixture (Oral) | খনিজ লবণ (খাবার)", generic: "Chelated Minerals & Vitamins", brand: "Min-A-Vet, Rumicare Gold" },
                 { category: "Liver Tonic | লিভার টনিক", generic: "Herbal Liver Stimulants, Vit B12", brand: "Liv-a-Vet, Livatone" },
@@ -1023,21 +1060,18 @@
                 { category: "Topical Antiseptic | জীবাণুনাশক (বাহ্যিক)", generic: "Povidone-Iodine / Chlorhexidine", brand: "Povisept, Viodin" }
             ];
             return `
-                <div class="card-header">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
-                    <h2>Essential & Supportive Pharmacy | প্রয়োজনীয় ও সহায়ক ঔষধ</h2>
-                </div>
-                <p class="mb-4 text-sm text-gray-600"><strong>Important:</strong> Always use medicine under the guidance of a veterinarian.</p>
-                <div class="overflow-x-auto"><table class="table-auto w-full text-left">
-                    <thead><tr><th class="px-4 py-2">Category | প্রকার</th><th class="px-4 py-2">Generic Name / Type</th><th class="px-4 py-2">BD Brand Name</th></tr></thead>
-                    <tbody>${meds.map(m => `<tr class="border-b"><td class="px-4 py-2">${m.category}</td><td class="px-4 py-2">${m.generic}</td><td class="px-4 py-2">${m.brand}</td></tr>`).join('')}</tbody>
-                </table></div>`;
+                <div class="card">
+                    <div class="card-header">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
+                        <h2>Essential & Supportive Pharmacy | প্রয়োজনীয় ও সহায়ক ঔষধ</h2>
+                    </div>
+                    <p class="mb-4 text-sm text-gray-600"><strong>Important:</strong> Always use medicine under the guidance of a veterinarian.</p>
+                    <div class="overflow-x-auto"><table class="table-auto w-full text-left">
+                        <thead><tr><th class="px-4 py-2">Category | প্রকার</th><th class="px-4 py-2">Generic Name / Type</th><th class="px-4 py-2">BD Brand Name</th></tr></thead>
+                        <tbody>${meds.map(m => `<tr class="border-b"><td class="px-4 py-2">${m.category}</td><td class="px-4 py-2">${m.generic}</td><td class="px-4 py-2">${m.brand}</td></tr>`).join('')}</tbody>
+                    </table></div>
+                </div>`;
         }
     </script>
 </body>
 </html>
-
-
-
-
-
